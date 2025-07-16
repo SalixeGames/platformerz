@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="StateMachine" load_steps=13 format=3 uid="uid://crqg7fxtcln4v"]
+
+[ext_resource type="Script" uid="uid://douoe7o0k4vk5" path="res://scripts/states/State.cs" id="1_2n7j7"]
+[ext_resource type="Script" uid="uid://d4cieyjrmhbok" path="res://scripts/player/IdleState.cs" id="2_b7hct"]
+[ext_resource type="Script" uid="uid://c3qdgljktl53t" path="res://scripts/player/WalkState.cs" id="3_qx0jv"]
+[ext_resource type="Script" uid="uid://b5r8a2jkyjqj8" path="res://scripts/player/JumpState.cs" id="4_b7hct"]
+[ext_resource type="Script" uid="uid://befq8hk8eaa6a" path="res://scripts/states/StateMachine.cs" id="4_efcaa"]
+[ext_resource type="Script" uid="uid://dy2waba1tf7c5" path="res://scripts/player/DoubleJumpState.cs" id="5_qx0jv"]
+[ext_resource type="Script" uid="uid://cvv3ic3wjtef8" path="res://scripts/player/AttackState.cs" id="6_efcaa"]
+
+[sub_resource type="Resource" id="Resource_3qbpp"]
+script = ExtResource("2_b7hct")
+Name = ""
+
+[sub_resource type="Resource" id="Resource_ln1qm"]
+script = ExtResource("3_qx0jv")
+Name = ""
+
+[sub_resource type="Resource" id="Resource_qx0jv"]
+script = ExtResource("4_b7hct")
+Name = ""
+metadata/_custom_type_script = "uid://b5r8a2jkyjqj8"
+
+[sub_resource type="Resource" id="Resource_efcaa"]
+script = ExtResource("5_qx0jv")
+Name = ""
+metadata/_custom_type_script = "uid://dy2waba1tf7c5"
+
+[sub_resource type="Resource" id="Resource_kxt71"]
+script = ExtResource("6_efcaa")
+Name = ""
+metadata/_custom_type_script = "uid://cvv3ic3wjtef8"
+
+[resource]
+script = ExtResource("4_efcaa")
+StatesList = Array[ExtResource("1_2n7j7")]([SubResource("Resource_3qbpp"), SubResource("Resource_ln1qm"), SubResource("Resource_qx0jv"), SubResource("Resource_efcaa"), SubResource("Resource_kxt71")])
+metadata/_custom_type_script = "uid://befq8hk8eaa6a"

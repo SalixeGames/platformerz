@@ -23,10 +23,14 @@ public partial class PlayerController : CharacterBody2D
     // get gravity from project settings (keep everything synced)
     public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
     [Export] public AnimationPlayer Animator;
+
+    private GlobalScript global_script;
     
     public override void _Ready()
     {
         stateMachine?._Ready(this);
+        global_script = GetNode<GlobalScript>("/root/GlobalScript");
+        global_script.LoadGame("test_save");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -59,7 +63,7 @@ public partial class PlayerController : CharacterBody2D
         base._Process(delta);
 
         Direction.X = (Input.GetActionStrength("walk_right") - Input.GetActionStrength("walk_left")) * moveSpeed;
-
+        
         // apply gravity if in the air
         if (!IsOnFloor()) {
             Direction.Y += Gravity * (float)delta;

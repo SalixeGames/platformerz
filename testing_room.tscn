@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://bee0dbqcgtcir"]
+[gd_scene load_steps=6 format=4 uid="uid://bee0dbqcgtcir"]
 
 [ext_resource type="PackedScene" uid="uid://bm84wsu8gms36" path="res://player.tscn" id="2_b3l5j"]
 [ext_resource type="Texture2D" uid="uid://deu5mu640yn4v" path="res://sprites/environnement_small.png" id="2_hihby"]
+[ext_resource type="PackedScene" uid="uid://cd6ev54o3e7i1" path="res://scenes/pickables/blob.tscn" id="3_hihby"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hihby"]
 texture = ExtResource("2_hihby")
@@ -42,3 +43,14 @@ tile_set = SubResource("TileSet_hihby")
 position = Vector2(8, 51)
 moveSpeed = 75.0
 jumpVelocity = 200.0
+
+[node name="Blob" parent="." instance=ExtResource("3_hihby")]
+position = Vector2(20, 20)
+
+[node name="Blob2" parent="." instance=ExtResource("3_hihby")]
+position = Vector2(-28, -52)
+id = 1
+
+[node name="Blob3" parent="." instance=ExtResource("3_hihby")]
+position = Vector2(266, -82)
+id = 2

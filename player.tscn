@@ -640,7 +640,7 @@ collision_mask = 64
 shape = SubResource("CircleShape2D_i3pqv")
 
 [node name="Floor" type="Area2D" parent="AreaContainer"]
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/Floor"]
 shape = SubResource("CircleShape2D_i3pqv")
@@ -656,6 +656,7 @@ libraries = {
 [connection signal="body_exited" from="AreaContainer/CeilingCollider" to="." method="_on_ceiling_left"]
 [connection signal="body_entered" from="AreaContainer/WallCollider" to="." method="_on_wall_entered"]
 [connection signal="body_exited" from="AreaContainer/WallCollider" to="." method="_on_wall_left"]
+[connection signal="area_entered" from="AreaContainer/Floor" to="." method="_on_drop_area_entered"]
 [connection signal="body_entered" from="AreaContainer/Floor" to="." method="_on_floor_entered"]
 [connection signal="body_exited" from="AreaContainer/Floor" to="." method="_on_floor_left"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

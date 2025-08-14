@@ -11,5 +11,9 @@ public partial class Blob : Area2D
     {
         base._Ready();
         Animator.Play("blob_anim");
+        if (GlobalScript.Instance.BlobsList.Contains(id))
+        {
+            QueueFree();
+        }
     }
 }

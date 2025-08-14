@@ -24,19 +24,16 @@ public partial class PlayerController : CharacterBody2D
     // get gravity from project settings (keep everything synced)
     public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
     [Export] public AnimationPlayer Animator;
-
-    private GlobalScript global_script;
     
     public override void _Ready()
     {
         stateMachine?._Ready(this);
-        global_script = GetNode<GlobalScript>("/root/GlobalScript");
-        global_script.LoadGame("test_save");
+        GlobalScript.Instance.LoadGame("test_save");
     }
 
     public override void _ExitTree()
     {
-        global_script.SaveGame("test_save");
+        GlobalScript.Instance.SaveGame("test_save");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -81,8 +78,8 @@ public partial class PlayerController : CharacterBody2D
 
         if (Input.IsActionJustPressed("get_info"))
         {
-            GD.Print("Life: " + global_script.Health.ToString() + " \nBlobs: " + global_script.BlobsList);
-            global_script.SaveGame("test_save");
+            GD.Print("Life: " + GlobalScript.Instance.Health.ToString() + " \nBlobs: " + GlobalScript.Instance.BlobsList);
+            GlobalScript.Instance.SaveGame("test_save");
         }
         
         stateMachine._Process(delta);
@@ -138,7 +135,7 @@ public partial class PlayerController : CharacterBody2D
         {
             Blob blob = (Blob)body;
             GD.Print(blob.id);
-            global_script.BlobsList.Add(blob.id);
+            GlobalScript.Instance.BlobsList.Add(blob.id);
             body.QueueFree();
         }
     }

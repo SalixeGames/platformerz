@@ -6,7 +6,7 @@ using Array = System.Array;
 
 public partial class GlobalScript : Node
 {
-    public GlobalScript Instance { get; private set; }
+    public static GlobalScript Instance { get; set; }
 
     private static string _savingPath = "res://";
 
@@ -32,7 +32,6 @@ public partial class GlobalScript : Node
         using var file = FileAccess.Open(_savingPath + saveFileId, FileAccess.ModeFlags.Read);
         Variant DataVariant = file.GetVar(true);
         Dictionary<String, String> data = DataVariant.As<Dictionary<String, String>>();
-        GD.Print(data);
         _SetMetadata(data);
         file.Close();
         
@@ -49,11 +48,26 @@ public partial class GlobalScript : Node
 
     private void _SetMetadata(Dictionary<string, string> data)
     {
-        Health = data["Health"].ToInt();
-        BlobsList = new Array<int>();
-        foreach (String blobId in data["BlobsList"].Split(";"))
+        if (!data.ContainsKey("Health"))
         {
-            BlobsList.Add(blobId.ToInt());
+            Health = 0;
+        }
+        else
+        {
+            Health = data["Health"].ToInt();
+        }
+
+        if (!data.ContainsKey("BlobsList"))
+        {
+            BlobsList = new Array<int>();
+        }
+        else
+        {
+            BlobsList = new Array<int>();
+            foreach (String blobId in data["BlobsList"].Split(";"))
+            {
+                BlobsList.Add(blobId.ToInt());
+            }
         }
     }
 }

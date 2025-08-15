@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://bee0dbqcgtcir"]
+[gd_scene load_steps=7 format=4 uid="uid://bee0dbqcgtcir"]
 
 [ext_resource type="PackedScene" uid="uid://bm84wsu8gms36" path="res://player.tscn" id="2_b3l5j"]
 [ext_resource type="Texture2D" uid="uid://deu5mu640yn4v" path="res://sprites/environnement_small.png" id="2_hihby"]
 [ext_resource type="PackedScene" uid="uid://cd6ev54o3e7i1" path="res://scenes/pickables/blob.tscn" id="3_hihby"]
+[ext_resource type="PackedScene" uid="uid://dchvj578mcpog" path="res://scenes/door.tscn" id="4_jqyws"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hihby"]
 texture = ExtResource("2_hihby")
@@ -54,3 +55,6 @@ id = 1
 [node name="Blob3" parent="." instance=ExtResource("3_hihby")]
 position = Vector2(266, -82)
 id = 2
+
+[node name="Door" parent="." instance=ExtResource("4_jqyws")]
+position = Vector2(-14, 20)

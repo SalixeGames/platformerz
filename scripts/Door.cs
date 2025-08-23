@@ -18,10 +18,10 @@ public partial class Door : Node2D
 
     private Font _defaultFont = ThemeDB.FallbackFont;
     private int _currentBlobPriceReal;
+    private bool _playerNear = false;
 
     public override void _EnterTree()
     {
-        base._EnterTree();
         _currentBlobPriceReal = BlobPrice - GlobalScript.Instance.BlobsList.Count;
     }
 
@@ -31,21 +31,26 @@ public partial class Door : Node2D
         
         _adjustePrice();
         
-        if (Input.IsActionJustPressed("up"))
+        if (Input.IsActionJustPressed("up") && _playerNear)
         {
             BlobPrice += 1;
-            if (BlobPrice > NumberSprites.Count - 1)
+            if (BlobPrice > NumberSprites.Count - 1 +  GlobalScript.Instance.BlobsList.Count)
             {
-                BlobPrice = NumberSprites.Count - 1;
+                BlobPrice = NumberSprites.Count - 1 +  GlobalScript.Instance.BlobsList.Count;
             }
         }
-        if (Input.IsActionJustPressed("down"))
+        if (Input.IsActionJustPressed("down") && _playerNear)
         {
             BlobPrice -= 1;
-            if (BlobPrice < 0)
+            if (BlobPrice < 0 + GlobalScript.Instance.BlobsList.Count)
             {
-                BlobPrice = 0;
+                BlobPrice = 0 + GlobalScript.Instance.BlobsList.Count;
             }
+        }
+
+        if (Input.IsActionJustPressed("interact") && _playerNear && _currentBlobPriceReal <= 0)
+        {
+            AnimationPlayer.Play("open");
         }
     }
 
@@ -65,11 +70,29 @@ public partial class Door : Node2D
     
     public void _on_player_area_entered(Node body)
     {
-        
+        if (_currentBlobPriceReal != 0)
+        {
+            CantPressE.Show();
+        }
+        else
+        {
+            PressE.Show();
+        }
+        _playerNear = true;
     }
 
     public void _on_player_area_exited(Node body)
     {
-        
+        PressE.Hide();
+        CantPressE.Hide();
+        _playerNear = false;
+    }
+
+    public void _animation_finished(StringName animationName)
+    {
+        if (animationName == "open")
+        {
+            QueueFree();
+        }
     }
 }

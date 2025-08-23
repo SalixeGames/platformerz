@@ -105,5 +105,6 @@ texture = ExtResource("4_18pbm")
 [node name="NumberSprite" type="Sprite2D" parent="."]
 texture = ExtResource("6_q5w8r")
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_area_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_player_area_exited"]

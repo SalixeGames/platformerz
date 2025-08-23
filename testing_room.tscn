@@ -58,3 +58,9 @@ id = 2
 
 [node name="Door" parent="." instance=ExtResource("4_jqyws")]
 position = Vector2(-14, 20)
+
+[node name="Door2" parent="." instance=ExtResource("4_jqyws")]
+position = Vector2(85, -60)
+
+[node name="Door3" parent="." instance=ExtResource("4_jqyws")]
+position = Vector2(137, 20)

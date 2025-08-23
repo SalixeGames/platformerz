@@ -17,11 +17,20 @@ public partial class Door : Node2D
     [Export] public Font TextFont;
 
     private Font _defaultFont = ThemeDB.FallbackFont;
+    private int _currentBlobPriceReal;
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        _currentBlobPriceReal = BlobPrice - GlobalScript.Instance.BlobsList.Count;
+    }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        CostLabel.Texture = NumberSprites[BlobPrice];
+        
+        _adjustePrice();
+        
         if (Input.IsActionJustPressed("up"))
         {
             BlobPrice += 1;
@@ -37,6 +46,20 @@ public partial class Door : Node2D
             {
                 BlobPrice = 0;
             }
+        }
+    }
+
+    private void _adjustePrice()
+    {
+        int blobPriceReal = BlobPrice - GlobalScript.Instance.BlobsList.Count;
+        if (blobPriceReal < 0)
+        {
+            blobPriceReal = 0;
+        }
+        if (_currentBlobPriceReal != blobPriceReal)
+        {
+            _currentBlobPriceReal = blobPriceReal;
+            CostLabel.Texture = NumberSprites[blobPriceReal];
         }
     }
     

@@ -31,10 +31,10 @@ public partial class PlayerController : CharacterBody2D
         GlobalScript.Instance.LoadGame("test_save");
     }
 
-    public override void _ExitTree()
+    /* public override void _ExitTree()
     {
         GlobalScript.Instance.SaveGame("test_save");
-    }
+    } */
 
     public override void _PhysicsProcess(double delta)
     {

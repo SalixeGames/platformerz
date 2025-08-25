@@ -20,7 +20,7 @@ public partial class JumpState : State
 
     public override State HandleInput(InputEvent @event)
     {
-        if (@event.IsActionPressed("jump"))
+        if (@event.IsActionPressed("jump") && GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.DoubleJump))
         {
             _canJump = true;
             fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity;

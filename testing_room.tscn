@@ -42,7 +42,6 @@ tile_map_data = PackedByteArray("AAD//wEAAgABAAAAAAAAAAEAAgABAAAAAAABAAEAAgACAAA
 tile_set = SubResource("TileSet_hihby")
 
 [node name="Player" parent="." instance=ExtResource("2_b3l5j")]
-position = Vector2(8, 51)
 moveSpeed = 75.0
 jumpVelocity = 200.0
 

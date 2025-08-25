@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -12,6 +13,7 @@ public partial class StateMachine : Resource
     public System.Collections.Generic.Dictionary<string, State> States;
     private State _currentState;
     public State PreviousState;
+    public DateTime LastTransition;
     public PlayerController Controller;
 
     public StateMachine()
@@ -68,6 +70,8 @@ public partial class StateMachine : Resource
     {
         if (state == _currentState)
             return;
+        LastTransition = DateTime.Now;
+        
         PreviousState = _currentState;
         _currentState?.Exit();
         _currentState = state;

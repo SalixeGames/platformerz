@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 namespace Platformerz.scripts.player;
@@ -23,14 +24,16 @@ public partial class PlayerController : CharacterBody2D
     // get gravity from project settings (keep everything synced)
     public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
     [Export] public AnimationPlayer Animator;
-
-    private GlobalScript global_script;
     
     public override void _Ready()
     {
         stateMachine?._Ready(this);
-        global_script = GetNode<GlobalScript>("/root/GlobalScript");
-        global_script.LoadGame("test_save");
+        GlobalScript.Instance.LoadGame("test_save");
+    }
+
+    public override void _ExitTree()
+    {
+        GlobalScript.Instance.SaveGame("test_save");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -71,6 +74,12 @@ public partial class PlayerController : CharacterBody2D
         else
         {
             Direction.Y = 0;
+        }
+
+        if (Input.IsActionJustPressed("get_info"))
+        {
+            GD.Print("Life: " + GlobalScript.Instance.Health.ToString() + " \nBlobs: " + GlobalScript.Instance.BlobsList + " \nPowers: " + GlobalScript.Instance.PowersList);
+            GlobalScript.Instance.SaveGame("test_save");
         }
         
         stateMachine._Process(delta);
@@ -118,5 +127,23 @@ public partial class PlayerController : CharacterBody2D
     public void _on_animation_player_animation_finished(string animationName)
     {
         stateMachine._AnimationEnd(animationName);
+    }
+
+    public void _on_drop_area_entered(Node2D body)
+    {
+        if (body.GetType() == typeof(Blob))
+        {
+            Blob blob = (Blob)body;
+            GD.Print(blob.id);
+            GlobalScript.Instance.BlobsList.Add(blob.id);
+            body.QueueFree();
+        }
+        if (body.GetType() == typeof(Powerups)) 
+        {
+            Powerups powerup = (Powerups)body;
+            GD.Print(powerup.Powerup);
+            GlobalScript.Instance.PowersList.Add(powerup.Powerup);
+            body.QueueFree();
+        }
     }
 }

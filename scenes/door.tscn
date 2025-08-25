@@ -1,0 +1,110 @@
+[gd_scene load_steps=30 format=3 uid="uid://dchvj578mcpog"]
+
+[ext_resource type="Texture2D" uid="uid://ci1m4g8g0da1g" path="res://sprites/door.png" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://dyd6718tog2iy" path="res://scripts/Door.cs" id="1_uvdjg"]
+[ext_resource type="FontFile" uid="uid://bdjjrl0fodr1s" path="res://GoogleSansCode-Regular.ttf" id="2_18pbm"]
+[ext_resource type="Texture2D" uid="uid://b5in4l88svk7m" path="res://sprites/1.png" id="3_hlrvf"]
+[ext_resource type="Texture2D" uid="uid://dl60dfc45plfj" path="res://sprites/e_pop_up.png" id="3_la1wf"]
+[ext_resource type="Texture2D" uid="uid://bgnnw2plgip5b" path="res://sprites/not_e_pop_up.png" id="4_18pbm"]
+[ext_resource type="Texture2D" uid="uid://cndmftrk2e53s" path="res://sprites/2.png" id="4_if5a1"]
+[ext_resource type="Texture2D" uid="uid://xbed3tjxorf3" path="res://sprites/3.png" id="5_ab21w"]
+[ext_resource type="Texture2D" uid="uid://c7m04mec406oq" path="res://sprites/4.png" id="6_1ohpd"]
+[ext_resource type="Texture2D" uid="uid://b374vm8h4ler7" path="res://sprites/0.png" id="6_q5w8r"]
+[ext_resource type="Texture2D" uid="uid://sgb16lhf5eyq" path="res://sprites/5.png" id="7_hac6s"]
+[ext_resource type="Texture2D" uid="uid://c21f1rcj4g7vv" path="res://sprites/6.png" id="8_j5bs6"]
+[ext_resource type="Texture2D" uid="uid://k6mehfvds1p5" path="res://sprites/7.png" id="9_2bwol"]
+[ext_resource type="Texture2D" uid="uid://3aon3bn3mqyd" path="res://sprites/8.png" id="10_piyrh"]
+[ext_resource type="Texture2D" uid="uid://cvrhemgrgaboo" path="res://sprites/9.png" id="11_yjedc"]
+[ext_resource type="Texture2D" uid="uid://eg5aecjwmp67" path="res://sprites/10.png" id="12_qf4ce"]
+[ext_resource type="Texture2D" uid="uid://ckdx0krru57v3" path="res://sprites/11.png" id="13_aivh6"]
+[ext_resource type="Texture2D" uid="uid://s3hf52k8kgdx" path="res://sprites/12.png" id="14_7ljja"]
+[ext_resource type="Texture2D" uid="uid://cyqqi4jeh6s8f" path="res://sprites/13.png" id="15_gabdl"]
+[ext_resource type="Texture2D" uid="uid://xajvg6y4wbbg" path="res://sprites/14.png" id="16_2fj8v"]
+[ext_resource type="Texture2D" uid="uid://cpcyleowdn3mu" path="res://sprites/15.png" id="17_b6ryk"]
+[ext_resource type="Texture2D" uid="uid://ba4ksp8ckrgoq" path="res://sprites/16.png" id="18_ttkhy"]
+[ext_resource type="Texture2D" uid="uid://c1f08ylagd1f4" path="res://sprites/17.png" id="19_0hp88"]
+[ext_resource type="Texture2D" uid="uid://c4g05ikb531tu" path="res://sprites/18.png" id="20_03ntk"]
+[ext_resource type="Texture2D" uid="uid://dlymc0iarxyld" path="res://sprites/19.png" id="21_g81xo"]
+
+[sub_resource type="Animation" id="Animation_la1wf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_83dcw"]
+resource_name = "open"
+step = 0.0714
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714, 0.1428, 0.2142, 0.2856, 0.357, 0.4284, 0.4998, 0.5712, 0.6426, 0.714, 0.7854, 0.8568),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_18pbm"]
+_data = {
+&"RESET": SubResource("Animation_la1wf"),
+&"open": SubResource("Animation_83dcw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5w8r"]
+size = Vector2(38, 20)
+
+[node name="Door" type="Node2D" node_paths=PackedStringArray("AnimationPlayer", "PressE", "CantPressE", "CostLabel")]
+z_index = -1
+script = ExtResource("1_uvdjg")
+AnimationPlayer = NodePath("AnimationPlayer")
+BlobPrice = 15
+PressE = NodePath("PressE")
+CantPressE = NodePath("CantPressE")
+CostLabel = NodePath("NumberSprite")
+NumberSprites = Array[CompressedTexture2D]([ExtResource("6_q5w8r"), ExtResource("3_hlrvf"), ExtResource("4_if5a1"), ExtResource("5_ab21w"), ExtResource("6_1ohpd"), ExtResource("7_hac6s"), ExtResource("8_j5bs6"), ExtResource("9_2bwol"), ExtResource("10_piyrh"), ExtResource("11_yjedc"), ExtResource("12_qf4ce"), ExtResource("13_aivh6"), ExtResource("14_7ljja"), ExtResource("15_gabdl"), ExtResource("16_2fj8v"), ExtResource("17_b6ryk"), ExtResource("18_ttkhy"), ExtResource("19_0hp88"), ExtResource("20_03ntk"), ExtResource("21_g81xo")])
+TextFont = ExtResource("2_18pbm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("1_hpvv5")
+hframes = 13
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_18pbm")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_q5w8r")
+
+[node name="PressE" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -17)
+texture = ExtResource("3_la1wf")
+
+[node name="CantPressE" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -17)
+texture = ExtResource("4_18pbm")
+
+[node name="NumberSprite" type="Sprite2D" parent="."]
+texture = ExtResource("6_q5w8r")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_player_area_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_player_area_exited"]

@@ -11,7 +11,23 @@ public partial class GlobalScript : Node
     private static string _savingPath = "res://";
 
     public int Health { get; set; }
+    
     public Array<int> BlobsList { get; set; }
+    
+    public enum Powerups
+    {
+        DoubleJump,
+        WallSlide,
+        Attack,
+        CeilingJump,
+        Dash,
+        Sprint,
+        Combo1,
+        Combo2,
+        SpringJump
+    }
+
+    public Array<Powerups> PowersList { get; set; } = new Array<Powerups>();
 
     public override void _Ready()
     {
@@ -29,9 +45,13 @@ public partial class GlobalScript : Node
 
     public void LoadGame(string saveFileId)
     {
+        Dictionary<String, String> data = new Dictionary<String, String>();
         using var file = FileAccess.Open(_savingPath + saveFileId, FileAccess.ModeFlags.Read);
-        Variant DataVariant = file.GetVar(true);
-        Dictionary<String, String> data = DataVariant.As<Dictionary<String, String>>();
+        if (file != null)
+        {
+            Variant DataVariant = file.GetVar(true);
+            data = DataVariant.As<Dictionary<String, String>>();
+        }
         _SetMetadata(data);
         file.Close();
         
@@ -43,6 +63,12 @@ public partial class GlobalScript : Node
         Dictionary data = new Dictionary();
         data.Add("Health", Health);
         data.Add("BlobsList", String.Join(';', BlobsList));
+        Array<int> PowersInt = new Array<int>();
+        foreach (Powerups power in PowersList)
+        {
+            PowersInt.Add((int)power);
+        }
+        data.Add("PowersList", String.Join(';', PowersInt));
         return data;
     }
 
@@ -69,5 +95,22 @@ public partial class GlobalScript : Node
                 BlobsList.Add(blobId.ToInt());
             }
         }
+
+        if (!data.ContainsKey("PowersList") || data["PowersList"] == "")
+        {
+            GD.Print(0);
+            PowersList = new Array<Powerups>();
+        }
+        else
+        {
+            GD.Print(1);
+            PowersList = new Array<Powerups>();
+            foreach (String powerName in data["PowersList"].Split(";"))
+            {
+                
+                PowersList.Add((Powerups)powerName.ToInt());
+            }
+        }
+        GD.Print(PowersList);
     }
 }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://bee0dbqcgtcir"]
+[gd_scene load_steps=8 format=4 uid="uid://bee0dbqcgtcir"]
 
 [ext_resource type="PackedScene" uid="uid://bm84wsu8gms36" path="res://player.tscn" id="2_b3l5j"]
 [ext_resource type="Texture2D" uid="uid://deu5mu640yn4v" path="res://sprites/environnement_small.png" id="2_hihby"]
 [ext_resource type="PackedScene" uid="uid://cd6ev54o3e7i1" path="res://scenes/pickables/blob.tscn" id="3_hihby"]
 [ext_resource type="PackedScene" uid="uid://dchvj578mcpog" path="res://scenes/door.tscn" id="4_jqyws"]
+[ext_resource type="PackedScene" uid="uid://bcsgmbadt8yle" path="res://scenes/pickables/powerups.tscn" id="5_b24ak"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hihby"]
 texture = ExtResource("2_hihby")
@@ -37,7 +38,7 @@ sources/2 = SubResource("TileSetAtlasSource_hihby")
 [node name="TestingRoom" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD//wEAAgABAAAAAAAAAAEAAgABAAAAAAABAAEAAgACAAAAAAD+/wEAAgAAAAAAAAD+/wIAAgAAAAEAAAD+/wMAAgAAAAEAAAD+/wQAAgAAAAEAAAD+/wUAAgAAAAEAAAD+/wYAAgAAAAEAAAABAAIAAgABAAEAAAABAAMAAgABAAEAAAABAAQAAgABAAEAAAABAAUAAgABAAEAAAABAAYAAgABAAEAAAD9/wMAAgAAAAAAAAAAAAMAAgABAAAAAAABAAcAAgABAAAAAAAAAAcAAgAAAAAAAAACAAcAAgABAAAAAAADAAcAAgABAAAAAAAEAAcAAgAAAAEAAAAFAAcAAgABAAAAAAAGAAcAAgABAAAAAAAHAAcAAgABAAAAAAAIAAcAAgABAAAAAAAJAAcAAgACAAAAAAAAAAgAAgAAAAEAAAAJAAgAAgABAAEAAAAKAAgAAgABAAAAAAALAAgAAgABAAAAAAAMAAgAAgACAAAAAAAEAAYAAgAAAAEAAAAEAAUAAgAAAAEAAAAEAAQAAgAAAAEAAAAEAAMAAgAAAAEAAAAEAAIAAgAAAAEAAAAEAAEAAgAAAAEAAAAEAAAAAgAAAAEAAAAEAP//AgAAAAEAAAAEAP7/AgAAAAEAAAAEAP3/AgAAAAEAAAAEAPz/AgAAAAAAAAAFAPz/AgABAAAAAAAGAPz/AgABAAAAAAAHAPz/AgABAAAAAAAIAPz/AgABAAAAAAAJAPz/AgACAAAAAAAJAP3/AgABAAEAAAAJAP7/AgABAAEAAAAJAP//AgABAAEAAAAJAAAAAgABAAEAAAAJAAEAAgABAAEAAAAJAAIAAgAAAAEAAAAJAAMAAgABAAAAAAAKAAMAAgACAAAAAAAIAAEAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD//wEAAgABAAAAAAAAAAEAAgABAAAAAAABAAEAAgACAAAAAAD+/wEAAgAAAAAAAAD+/wIAAgAAAAEAAAD+/wMAAgAAAAEAAAD+/wQAAgAAAAEAAAD+/wUAAgAAAAEAAAD+/wYAAgAAAAEAAAABAAIAAgABAAEAAAABAAMAAgABAAEAAAABAAQAAgABAAEAAAABAAUAAgABAAEAAAABAAYAAgABAAEAAAD9/wMAAgAAAAAAAAAAAAMAAgABAAAAAAABAAcAAgABAAAAAAAAAAcAAgAAAAAAAAACAAcAAgABAAAAAAADAAcAAgABAAAAAAAEAAcAAgAAAAEAAAAFAAcAAgABAAAAAAAGAAcAAgABAAAAAAAHAAcAAgABAAAAAAAIAAcAAgABAAAAAAAJAAcAAgACAAAAAAAAAAgAAgAAAAEAAAAJAAgAAgABAAEAAAAKAAgAAgABAAAAAAALAAgAAgABAAAAAAAMAAgAAgACAAAAAAAEAAYAAgAAAAEAAAAEAAUAAgAAAAEAAAAEAAQAAgAAAAEAAAAEAAMAAgAAAAEAAAAEAAIAAgAAAAEAAAAEAAEAAgAAAAEAAAAEAAAAAgAAAAEAAAAEAP//AgAAAAEAAAAEAP7/AgAAAAEAAAAEAP3/AgAAAAEAAAAEAPz/AgAAAAAAAAAFAPz/AgABAAAAAAAGAPz/AgABAAAAAAAHAPz/AgABAAAAAAAIAPz/AgABAAAAAAAJAPz/AgACAAAAAAAJAP3/AgABAAEAAAAJAP7/AgABAAEAAAAJAP//AgABAAEAAAAJAAAAAgABAAEAAAAJAAEAAgABAAEAAAAJAAIAAgAAAAEAAAAJAAMAAgABAAAAAAAKAAMAAgACAAAAAAAIAAEAAgAAAAAAAAAPAPv/AgAAAAEAAAAPAPr/AgAAAAEAAAAQAPn/AgABAAAAAAARAPn/AgABAAAAAAASAPn/AgABAAAAAAATAPn/AgABAAAAAAAVAPn/AgABAAAAAAAUAPn/AgABAAAAAAAWAPn/AgABAAAAAAAXAPn/AgABAAAAAAAYAPn/AgABAAAAAAAZAPn/AgABAAAAAAAaAPn/AgABAAAAAAAbAPn/AgABAAAAAAAcAPn/AgABAAAAAAAdAPn/AgABAAAAAAAeAPn/AgABAAAAAAARAP7/AgABAAAAAAASAP7/AgABAAAAAAAPAPz/AgAAAAEAAAAPAPn/AgAAAAAAAAAQAP7/AgAAAAAAAAAfAPn/AgACAAAAAAAfAPr/AgABAAEAAAAfAPv/AgABAAEAAAAfAPz/AgABAAEAAAAfAP3/AgABAAEAAAAfAP7/AgABAAEAAAAfAAAAAgABAAEAAAAfAP//AgABAAEAAAAQAP//AgAAAAEAAAAQAAAAAgAAAAEAAAA=")
 tile_set = SubResource("TileSet_hihby")
 
 [node name="Player" parent="." instance=ExtResource("2_b3l5j")]
@@ -64,3 +65,37 @@ position = Vector2(85, -60)
 
 [node name="Door3" parent="." instance=ExtResource("4_jqyws")]
 position = Vector2(137, 20)
+
+[node name="Powerups" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(265, -109)
+
+[node name="Powerups2" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(0, 0, 1, 1)
+position = Vector2(288, -109)
+Powerup = 1
+
+[node name="Powerups3" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(306, -108)
+Powerup = 2
+
+[node name="Powerups4" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(0, 1, 1, 1)
+position = Vector2(327, -108)
+Powerup = 3
+
+[node name="Powerups5" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(343, -108)
+Powerup = 4
+
+[node name="Powerups6" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(361, -108)
+Powerup = 5
+
+[node name="Powerups7" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(0.211765, 0.333333, 0.501961, 1)
+position = Vector2(379, -108)
+Powerup = 8

@@ -22,6 +22,7 @@ public partial class Door : Node2D
 
     public override void _EnterTree()
     {
+        base._EnterTree();
         _currentBlobPriceReal = BlobPrice - GlobalScript.Instance.BlobsList.Count;
     }
 
@@ -70,6 +71,8 @@ public partial class Door : Node2D
     
     public void _on_player_area_entered(Node body)
     {
+        GD.Print("GlobalScript.Instance.PowersList");
+        GD.Print(GlobalScript.Instance.PowersList);
         if (_currentBlobPriceReal != 0)
         {
             CantPressE.Show();

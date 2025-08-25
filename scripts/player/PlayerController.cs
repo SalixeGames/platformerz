@@ -78,7 +78,7 @@ public partial class PlayerController : CharacterBody2D
 
         if (Input.IsActionJustPressed("get_info"))
         {
-            GD.Print("Life: " + GlobalScript.Instance.Health.ToString() + " \nBlobs: " + GlobalScript.Instance.BlobsList);
+            GD.Print("Life: " + GlobalScript.Instance.Health.ToString() + " \nBlobs: " + GlobalScript.Instance.BlobsList + " \nPowers: " + GlobalScript.Instance.PowersList);
             GlobalScript.Instance.SaveGame("test_save");
         }
         
@@ -136,6 +136,13 @@ public partial class PlayerController : CharacterBody2D
             Blob blob = (Blob)body;
             GD.Print(blob.id);
             GlobalScript.Instance.BlobsList.Add(blob.id);
+            body.QueueFree();
+        }
+        if (body.GetType() == typeof(Powerups)) 
+        {
+            Powerups powerup = (Powerups)body;
+            GD.Print(powerup.Powerup);
+            GlobalScript.Instance.PowersList.Add(powerup.Powerup);
             body.QueueFree();
         }
     }

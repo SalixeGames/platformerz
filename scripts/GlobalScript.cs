@@ -12,7 +12,7 @@ public partial class GlobalScript : Node
 
     public int Health { get; set; }
     
-    public Array<int> BlobsList { get; set; }
+    public Array<int> BlobsList { get; set; } = new Array<int>();
     
     public enum Powerups
     {
@@ -37,7 +37,6 @@ public partial class GlobalScript : Node
     public void SaveGame(string saveFileId)
     {
         using FileAccess file = FileAccess.Open(_savingPath + saveFileId, FileAccess.ModeFlags.Write);
-        GD.Print(_GetMetadata());
         file.StoreVar(_GetMetadata());
         file.Close();
         GD.Print("Game " + saveFileId + " saved.");
@@ -51,9 +50,9 @@ public partial class GlobalScript : Node
         {
             Variant DataVariant = file.GetVar(true);
             data = DataVariant.As<Dictionary<String, String>>();
+            file.Close();
         }
         _SetMetadata(data);
-        file.Close();
         
         GD.Print("Game " + saveFileId + " loaded.");
     }
@@ -98,12 +97,10 @@ public partial class GlobalScript : Node
 
         if (!data.ContainsKey("PowersList") || data["PowersList"] == "")
         {
-            GD.Print(0);
             PowersList = new Array<Powerups>();
         }
         else
         {
-            GD.Print(1);
             PowersList = new Array<Powerups>();
             foreach (String powerName in data["PowersList"].Split(";"))
             {
@@ -111,6 +108,5 @@ public partial class GlobalScript : Node
                 PowersList.Add((Powerups)powerName.ToInt());
             }
         }
-        GD.Print(PowersList);
     }
 }

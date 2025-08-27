@@ -18,6 +18,7 @@ public partial class PlayerController : CharacterBody2D
     public bool OnWall = false;
     public bool OnCeil = false;
     public bool OnFloor = false;
+    public bool CanAerialStraffe = true;
 
     public Vector2 Direction = Vector2.Zero;
 	
@@ -61,24 +62,36 @@ public partial class PlayerController : CharacterBody2D
         return LookingDirection;
     }
 
+    public int GetSignedDirection()
+    {
+        WalkingDirection = LookingDirection;
+        
+        if(LookingDirection == "right")
+            return 1;
+        return -1;
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
 
-        Direction.X = (Input.GetActionStrength("walk_right") - Input.GetActionStrength("walk_left")) * moveSpeed;
+        float inputSlide = (Input.GetActionStrength("walk_right") - Input.GetActionStrength("walk_left"));
         
-        // apply gravity if in the air
+        if (CanAerialStraffe)
+        {
+            Direction.X = inputSlide * moveSpeed;
+        } 
         if (!IsOnFloor()) {
             Direction.Y += Gravity * (float)delta;
         }
         else
         {
+            Direction.X = inputSlide * moveSpeed;
             Direction.Y = 0;
         }
 
         if (Input.IsActionJustPressed("get_info"))
         {
-            GD.Print("Life: " + GlobalScript.Instance.Health.ToString() + " \nBlobs: " + GlobalScript.Instance.BlobsList + " \nPowers: " + GlobalScript.Instance.PowersList);
             GlobalScript.Instance.SaveGame("test_save");
         }
         
@@ -134,14 +147,12 @@ public partial class PlayerController : CharacterBody2D
         if (body.GetType() == typeof(Blob))
         {
             Blob blob = (Blob)body;
-            GD.Print(blob.id);
             GlobalScript.Instance.BlobsList.Add(blob.id);
             body.QueueFree();
         }
         if (body.GetType() == typeof(Powerups)) 
         {
             Powerups powerup = (Powerups)body;
-            GD.Print(powerup.Powerup);
             GlobalScript.Instance.PowersList.Add(powerup.Powerup);
             body.QueueFree();
         }

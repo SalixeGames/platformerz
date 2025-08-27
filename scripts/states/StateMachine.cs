@@ -37,6 +37,7 @@ public partial class StateMachine : Resource
             States.Add(state.Name, state);
             States[state.Name] = state;
             state.Controller = Controller;
+            state.Enter(); // reset
             state.Exit(); // reset
         }
         

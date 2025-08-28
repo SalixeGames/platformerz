@@ -27,8 +27,8 @@ public partial class WallSlideState : State
     {
         if (@event.IsActionPressed("jump"))
         {
-            if (fsm.Controller.Velocity.Y < -fsm.Controller.jumpVelocity / 2.5f) fsm.Controller.Direction.Y = fsm.Controller.Velocity.Y;
-            else fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity / 2.5f;
+            if (fsm.Controller.Velocity.Y < -fsm.Controller.jumpVelocity) fsm.Controller.Direction.Y = fsm.Controller.Velocity.Y;
+            else fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity;
             fsm.Controller.Direction.X = fsm.Controller.moveSpeed * -fsm.Controller.GetSignedDirection();
             fsm.Controller.Velocity = fsm.Controller.Direction;
             return fsm.PreviousState;

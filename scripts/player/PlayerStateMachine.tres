@@ -12,29 +12,35 @@
 [sub_resource type="Resource" id="Resource_3qbpp"]
 script = ExtResource("2_b7hct")
 Name = ""
+NonStrafeTime = 5.0
 
 [sub_resource type="Resource" id="Resource_ln1qm"]
 script = ExtResource("3_qx0jv")
 Name = ""
+NonStrafeTime = 5.0
 
 [sub_resource type="Resource" id="Resource_qx0jv"]
 script = ExtResource("4_b7hct")
 Name = ""
+NonStrafeTime = 5.0
 metadata/_custom_type_script = "uid://b5r8a2jkyjqj8"
 
 [sub_resource type="Resource" id="Resource_efcaa"]
 script = ExtResource("5_qx0jv")
 Name = ""
+NonStrafeTime = 5.0
 metadata/_custom_type_script = "uid://dy2waba1tf7c5"
 
 [sub_resource type="Resource" id="Resource_kxt71"]
 script = ExtResource("6_efcaa")
 Name = ""
+NonStrafeTime = 5.0
 metadata/_custom_type_script = "uid://cvv3ic3wjtef8"
 
 [sub_resource type="Resource" id="Resource_ir0a2"]
 script = ExtResource("7_3qbpp")
 Name = ""
+NonStrafeTime = 5.0
 metadata/_custom_type_script = "uid://dat1s40gkqwcr"
 
 [resource]

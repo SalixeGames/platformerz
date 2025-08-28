@@ -16,7 +16,10 @@ public partial class JumpState : State
     {
         base.Enter();
         _canJump = false;
-        fsm.Controller.CanAerialStraffe = false;
+        if (fsm.PreviousState != null && fsm.PreviousState.Name == "wall_slide")
+        {
+            fsm.Controller.CanAerialStraffe = false;
+        }
     }
 
     public override State HandleInput(InputEvent @event)

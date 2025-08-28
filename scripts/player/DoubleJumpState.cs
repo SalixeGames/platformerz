@@ -8,7 +8,10 @@ public partial class DoubleJumpState : State
     public override void Enter()
     {
         base.Enter();
-        fsm.Controller.CanAerialStraffe = false;
+        if (fsm.PreviousState != null && fsm.PreviousState.Name == "wall_slide")
+        {
+            fsm.Controller.CanAerialStraffe = false;
+        }
     }
     
     public override void Ready(StateMachine stateMachine)

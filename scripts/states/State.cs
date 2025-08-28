@@ -20,7 +20,7 @@ public partial class State : Resource
 
 	public virtual State Update(float delta)
 	{
-		if (DateTime.Now - fsm.LastTransition > TimeSpan.FromSeconds(0.35)) fsm.Controller.CanAerialStraffe = true;
+		if (DateTime.Now - fsm.LastTransition > TimeSpan.FromSeconds(0.35) || fsm.PreviousState.Name != "wall_slide") fsm.Controller.CanAerialStraffe = true;
 		return this;
 	}
 	public virtual State PhysicsUpdate(float delta) 

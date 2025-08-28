@@ -17,6 +17,15 @@ public partial class IdleState : State
         return this;
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        if (fsm.PreviousState != null && fsm.PreviousState.Name == "wall_slide")
+        {
+            fsm.Controller.CanAerialStraffe = false;
+        }
+    }
+
     public override State HandleInput(InputEvent @event)
     {
         if (@event.IsActionPressed("jump"))

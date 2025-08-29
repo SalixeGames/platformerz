@@ -32,6 +32,7 @@ public partial class IdleState : State
         base.Update(delta);
         if (fsm.Controller.Direction.X != 0)
         {
+            if (Input.IsActionPressed("sprint")) return fsm.States["sprint"];
             return fsm.States["walk"];
         }
         if (fsm.Controller.Direction.Y < 0)

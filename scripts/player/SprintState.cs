@@ -2,34 +2,24 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class WalkState : State
+public partial class SprintState : State
 {
+    private float _speedModif = 1.75f;
     public override void Ready(StateMachine stateMachine)
     {
         base.Ready(stateMachine);
-        Name = "walk";
+        Name = "sprint";
         fsm = stateMachine;
     }
 
     public override void Enter()
     {
         base.Enter();
-        if (fsm.PreviousState != null && fsm.PreviousState.Name == "wall_slide" && fsm.Controller.Direction.Y < 0)
-        {
-            fsm.Controller.CanAerialStraffe = false;
-        }
+        fsm.Controller.moveSpeed *= _speedModif;
     }
 
-    public override State Update(float delta)
+    public override State PhysicsUpdate(float delta)
     {
-        if (fsm.Controller.OnWall && !fsm.Controller.IsOnFloor() && fsm.Controller.Direction.X != 0 && fsm.Controller.Direction.Y != 0 && GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.WallSlide))
-        {
-            if (fsm.Controller.Direction.Y > 0)
-            {
-                fsm.Controller.Direction.Y = 0;
-            }
-            return fsm.States["wall_slide"];
-        }
         if (fsm.Controller.Direction.X == 0)
         {
             return fsm.States["idle"];
@@ -38,12 +28,8 @@ public partial class WalkState : State
         {
             return fsm.States["jump"];
         }
-        
-        if (Input.IsActionPressed("sprint")) return fsm.States["sprint"];
-        
-        fsm.Controller.Velocity = fsm.Controller.Direction;
-        
-        return this;
+        if (!Input.IsActionPressed("sprint")) return fsm.States["walk"];
+        return base.PhysicsUpdate(delta);
     }
 
     public override State HandleInput(InputEvent @event)
@@ -60,5 +46,11 @@ public partial class WalkState : State
             return fsm.States["dash"];
         }
         return base.HandleInput(@event);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        fsm.Controller.moveSpeed /= _speedModif;
     }
 }

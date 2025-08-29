@@ -22,7 +22,7 @@ public partial class WalkState : State
 
     public override State Update(float delta)
     {
-        if (fsm.Controller.OnWall && fsm.Controller.Direction.X != 0 && fsm.Controller.Direction.Y != 0 && GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.WallSlide))
+        if (fsm.Controller.OnWall && !fsm.Controller.IsOnFloor() && fsm.Controller.Direction.X != 0 && fsm.Controller.Direction.Y != 0 && GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.WallSlide))
         {
             if (fsm.Controller.Direction.Y > 0)
             {

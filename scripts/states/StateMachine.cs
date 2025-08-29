@@ -71,7 +71,7 @@ public partial class StateMachine : Resource
     {
         if (state == _currentState)
             return;
-        if (_currentState.Name == "wall_slide")
+        if (_currentState.Name == "wall_slide" || _currentState.Name == "attack")
             LastTransition = DateTime.Now;
         
         PreviousState = _currentState;

@@ -21,6 +21,7 @@ public partial class PlayerController : CharacterBody2D
     public bool OnFloor = false;
     public bool Dashing = false;
     public bool CanDash = true;
+    public bool CanAttack = true;
     public bool CanAerialStraffe = true;
 
     public Vector2 Direction = Vector2.Zero;
@@ -90,6 +91,7 @@ public partial class PlayerController : CharacterBody2D
         else
         {
             CanDash = true;
+            CanAttack = true;
             if (!Dashing) Direction.X = inputSlide * moveSpeed;
             Direction.Y = 0;
         }

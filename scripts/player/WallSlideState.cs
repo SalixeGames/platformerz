@@ -31,7 +31,8 @@ public partial class WallSlideState : State
             else fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity;
             fsm.Controller.Direction.X = fsm.Controller.moveSpeed * -fsm.Controller.GetSignedDirection();
             fsm.Controller.Velocity = fsm.Controller.Direction;
-            return fsm.PreviousState;
+            if (fsm.PreviousState == fsm.States["double_jump"]) return fsm.States["double_jump"];
+            return fsm.States["jump"];
         }
         return base.HandleInput(@event);
     }
@@ -65,7 +66,8 @@ public partial class WallSlideState : State
                     fsm.Controller.LookingDirection = "left";
                     break;
             }
-            return fsm.PreviousState;
+            if (fsm.PreviousState == fsm.States["double_jump"]) return fsm.States["double_jump"];
+            return fsm.States["jump"];
         }
         return this;
     }

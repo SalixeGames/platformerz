@@ -11,6 +11,12 @@ public partial class AttackState : State
         fsm = stateMachine;
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        fsm.Controller.CanAttack = false;
+    }
+
     public override State AnimationEnd(string animationName)
     {
         return fsm.PreviousState;

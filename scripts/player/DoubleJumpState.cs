@@ -37,7 +37,11 @@ public partial class DoubleJumpState : State
             fsm.Controller.Direction.Y = 0;
             return fsm.States["idle"];
         }
-        
+
+        if (fsm.Controller.OnCeil && GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.CeilingJump))
+        {
+            return fsm.States["ceil_reset"];
+        }
         fsm.Controller.Velocity = fsm.Controller.Direction;
         return this;
     }

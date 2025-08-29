@@ -14,7 +14,7 @@ public partial class WalkState : State
     public override void Enter()
     {
         base.Enter();
-        if (fsm.PreviousState != null && fsm.PreviousState.Name == "wall_slide")
+        if (fsm.PreviousState != null && fsm.PreviousState.Name == "wall_slide" && fsm.Controller.Direction.Y < 0)
         {
             fsm.Controller.CanAerialStraffe = false;
         }

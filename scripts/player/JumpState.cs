@@ -53,6 +53,11 @@ public partial class JumpState : State
         {
             return fsm.States["double_jump"];
         }
+
+        if (fsm.Controller.OnCeil && GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.CeilingJump))
+        {
+            return fsm.States["ceil_reset"];
+        }
         
         fsm.Controller.Velocity = fsm.Controller.Direction;
         return this;

@@ -30,6 +30,12 @@ public partial class JumpState : State
             fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity;
             fsm.Controller.Velocity = fsm.Controller.Direction;
         }
+
+        bool canDash = fsm.Controller.CanDash && GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.Dash);
+        if (@event.IsActionPressed("dash") && canDash)
+        {
+            return fsm.States["dash"];
+        }
         return base.HandleInput(@event);
     }
 

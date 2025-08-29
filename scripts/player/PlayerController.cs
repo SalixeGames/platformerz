@@ -8,6 +8,7 @@ public partial class PlayerController : CharacterBody2D
 	
     [Export] public float moveSpeed = 150.0f;
     [Export] public float jumpVelocity = 800.0f;
+    [Export] public float dashVelocity = 250.0f;
     [Export] public StateMachine stateMachine = new StateMachine();
     
     public string StateName = "idle";
@@ -18,6 +19,8 @@ public partial class PlayerController : CharacterBody2D
     public bool OnWall = false;
     public bool OnCeil = false;
     public bool OnFloor = false;
+    public bool Dashing = false;
+    public bool CanDash = true;
     public bool CanAerialStraffe = true;
 
     public Vector2 Direction = Vector2.Zero;
@@ -74,10 +77,10 @@ public partial class PlayerController : CharacterBody2D
     public override void _Process(double delta)
     {
         base._Process(delta);
-
+        
         float inputSlide = (Input.GetActionStrength("walk_right") - Input.GetActionStrength("walk_left"));
         
-        if (CanAerialStraffe)
+        if (CanAerialStraffe && !Dashing)
         {
             Direction.X = inputSlide * moveSpeed;
         } 
@@ -86,7 +89,8 @@ public partial class PlayerController : CharacterBody2D
         }
         else
         {
-            Direction.X = inputSlide * moveSpeed;
+            CanDash = true;
+            if (!Dashing) Direction.X = inputSlide * moveSpeed;
             Direction.Y = 0;
         }
 

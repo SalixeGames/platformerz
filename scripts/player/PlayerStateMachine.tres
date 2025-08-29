@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StateMachine" load_steps=17 format=3 uid="uid://crqg7fxtcln4v"]
+[gd_resource type="Resource" script_class="StateMachine" load_steps=19 format=3 uid="uid://crqg7fxtcln4v"]
 
 [ext_resource type="Script" uid="uid://douoe7o0k4vk5" path="res://scripts/states/State.cs" id="1_2n7j7"]
 [ext_resource type="Script" uid="uid://d4cieyjrmhbok" path="res://scripts/player/IdleState.cs" id="2_b7hct"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cvv3ic3wjtef8" path="res://scripts/player/AttackState.cs" id="6_efcaa"]
 [ext_resource type="Script" uid="uid://dat1s40gkqwcr" path="res://scripts/player/WallSlideState.cs" id="7_3qbpp"]
 [ext_resource type="Script" uid="uid://bf3caug1a216v" path="res://scripts/player/CeilResetState.cs" id="8_ln1qm"]
+[ext_resource type="Script" uid="uid://b1eolh8443c5l" path="res://scripts/player/DashState.cs" id="9_kxt71"]
 
 [sub_resource type="Resource" id="Resource_3qbpp"]
 script = ExtResource("2_b7hct")
@@ -43,7 +44,12 @@ script = ExtResource("8_ln1qm")
 Name = ""
 metadata/_custom_type_script = "uid://bf3caug1a216v"
 
+[sub_resource type="Resource" id="Resource_oikov"]
+script = ExtResource("9_kxt71")
+Name = ""
+metadata/_custom_type_script = "uid://b1eolh8443c5l"
+
 [resource]
 script = ExtResource("4_efcaa")
-StatesList = Array[ExtResource("1_2n7j7")]([SubResource("Resource_3qbpp"), SubResource("Resource_ln1qm"), SubResource("Resource_qx0jv"), SubResource("Resource_efcaa"), SubResource("Resource_kxt71"), SubResource("Resource_ir0a2"), SubResource("Resource_fjmoq")])
+StatesList = Array[ExtResource("1_2n7j7")]([SubResource("Resource_3qbpp"), SubResource("Resource_ln1qm"), SubResource("Resource_qx0jv"), SubResource("Resource_efcaa"), SubResource("Resource_kxt71"), SubResource("Resource_ir0a2"), SubResource("Resource_fjmoq"), SubResource("Resource_oikov")])
 metadata/_custom_type_script = "uid://befq8hk8eaa6a"

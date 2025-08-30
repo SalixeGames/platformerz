@@ -8,6 +8,7 @@ public partial class PlayerController : CharacterBody2D
 	
     [Export] public float moveSpeed = 150.0f;
     [Export] public float jumpVelocity = 800.0f;
+    [Export] public float SpringJumpModif = 2.0f;
     [Export] public float dashVelocity = 300.0f;
     [Export] public StateMachine stateMachine = new StateMachine();
     

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StateMachine" load_steps=25 format=3 uid="uid://crqg7fxtcln4v"]
+[gd_resource type="Resource" script_class="StateMachine" load_steps=27 format=3 uid="uid://crqg7fxtcln4v"]
 
 [ext_resource type="Script" uid="uid://douoe7o0k4vk5" path="res://scripts/states/State.cs" id="1_2n7j7"]
 [ext_resource type="Script" uid="uid://d4cieyjrmhbok" path="res://scripts/player/IdleState.cs" id="2_b7hct"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://i61i4pjrak6g" path="res://scripts/player/SprintState.cs" id="10_ir0a2"]
 [ext_resource type="Script" uid="uid://dmfl8ljbs0tpm" path="res://scripts/player/Attack2State.cs" id="11_oikov"]
 [ext_resource type="Script" uid="uid://cm5w7slr4sgrj" path="res://scripts/player/Attack3State.cs" id="12_ohlok"]
+[ext_resource type="Script" uid="uid://d0fu7mv628or7" path="res://scripts/player/SpringJumpState.cs" id="13_ohlok"]
 
 [sub_resource type="Resource" id="Resource_3qbpp"]
 script = ExtResource("2_b7hct")
@@ -67,7 +68,12 @@ script = ExtResource("12_ohlok")
 Name = ""
 metadata/_custom_type_script = "uid://cm5w7slr4sgrj"
 
+[sub_resource type="Resource" id="Resource_jb7vn"]
+script = ExtResource("13_ohlok")
+Name = ""
+metadata/_custom_type_script = "uid://d0fu7mv628or7"
+
 [resource]
 script = ExtResource("4_efcaa")
-StatesList = Array[ExtResource("1_2n7j7")]([SubResource("Resource_3qbpp"), SubResource("Resource_ln1qm"), SubResource("Resource_qx0jv"), SubResource("Resource_efcaa"), SubResource("Resource_kxt71"), SubResource("Resource_ir0a2"), SubResource("Resource_fjmoq"), SubResource("Resource_oikov"), SubResource("Resource_ohlok"), SubResource("Resource_geimi"), SubResource("Resource_n53j5")])
+StatesList = Array[ExtResource("1_2n7j7")]([SubResource("Resource_3qbpp"), SubResource("Resource_ln1qm"), SubResource("Resource_qx0jv"), SubResource("Resource_efcaa"), SubResource("Resource_kxt71"), SubResource("Resource_ir0a2"), SubResource("Resource_fjmoq"), SubResource("Resource_oikov"), SubResource("Resource_ohlok"), SubResource("Resource_geimi"), SubResource("Resource_n53j5"), SubResource("Resource_jb7vn")])
 metadata/_custom_type_script = "uid://befq8hk8eaa6a"

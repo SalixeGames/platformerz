@@ -53,7 +53,7 @@ public partial class JumpState : State
         if (fsm.Controller.Direction.Y == 0)
         {
             fsm.Controller.Direction.Y = 0;
-            return fsm.States["idle"];
+            return fsm.States["spring_jump"];
         }
         if (fsm.Controller.Direction.Y < 0 && _canJump)
         {

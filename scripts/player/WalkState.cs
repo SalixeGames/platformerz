@@ -38,8 +38,12 @@ public partial class WalkState : State
         {
             return fsm.States["jump"];
         }
-        
-        if (Input.IsActionPressed("sprint")) return fsm.States["sprint"];
+
+        if (Input.IsActionPressed("sprint") &&
+            GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.Sprint))
+        {
+            return fsm.States["sprint"];
+        }
         
         fsm.Controller.Velocity = fsm.Controller.Direction;
         

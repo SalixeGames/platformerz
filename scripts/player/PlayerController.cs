@@ -91,7 +91,7 @@ public partial class PlayerController : CharacterBody2D
         else
         {
             CanDash = true;
-            CanAttack = true;
+            if (!stateMachine.CurrentState.Name.Contains("attack")) CanAttack = true;
             if (!Dashing) Direction.X = inputSlide * moveSpeed;
             Direction.Y = 0;
         }

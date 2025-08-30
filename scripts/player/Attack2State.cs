@@ -2,14 +2,14 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class AttackState : State
+public partial class Attack2State : State
 {
     private bool _combo = false;
     
     public override void Ready(StateMachine stateMachine)
     {
         base.Ready(stateMachine);
-        Name = "attack";
+        Name = "attack_2";
         fsm = stateMachine;
     }
 
@@ -23,7 +23,7 @@ public partial class AttackState : State
     public override State HandleInput(InputEvent @event)
     {
         if (@event.IsActionPressed("attack") && 
-            GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.Combo1))
+            GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.Combo2))
         {
             _combo = true;
         }
@@ -32,7 +32,7 @@ public partial class AttackState : State
 
     public override State AnimationEnd(string animationName)
     {
-        if (_combo) return fsm.States["attack_2"];
+        if (_combo) return fsm.States["attack_3"];
         return fsm.PreAttackState;
     }
 }

@@ -11,8 +11,9 @@ public partial class StateMachine : Resource
     public Array<State> StatesList;
     
     public System.Collections.Generic.Dictionary<string, State> States;
-    private State _currentState;
+    public State CurrentState;
     public State PreviousState;
+    public State PreAttackState;
     public DateTime LastTransition;
     public PlayerController Controller;
 
@@ -41,42 +42,44 @@ public partial class StateMachine : Resource
             state.Exit(); // reset
         }
         
-        _currentState = StatesList.First();
-        _currentState?.Enter();
-        PreviousState = _currentState;
+        CurrentState = StatesList.First();
+        CurrentState?.Enter();
+        PreviousState = CurrentState;
+        PreAttackState =  CurrentState;
     }
 
     public void _Process(double delta)
     {
-        TransitionTo(_currentState?.Update((float)delta));
+        TransitionTo(CurrentState?.Update((float)delta));
     }
     
     public void _PhysicsProcess(double delta)
     {
-        TransitionTo(_currentState?.PhysicsUpdate((float)delta));
+        TransitionTo(CurrentState?.PhysicsUpdate((float)delta));
     }
     
     public void _UnhandledInput(InputEvent @event)
     {
-        TransitionTo(_currentState?.HandleInput(@event));
+        TransitionTo(CurrentState?.HandleInput(@event));
         @event.Dispose();
     }
 
     public void _AnimationEnd(string animationName)
     {
-        TransitionTo(_currentState?.AnimationEnd(animationName));
+        TransitionTo(CurrentState?.AnimationEnd(animationName));
     }
     
     public void TransitionTo(State state)
     {
-        if (state == _currentState)
+        if (state == CurrentState)
             return;
-        if (_currentState.Name == "wall_slide" || _currentState.Name == "attack")
+        if (CurrentState.Name == "wall_slide" || CurrentState.Name == "attack")
             LastTransition = DateTime.Now;
+        if (!CurrentState.Name.Contains("attack")) PreAttackState = CurrentState;
         
-        PreviousState = _currentState;
-        _currentState?.Exit();
-        _currentState = state;
-        _currentState?.Enter();
+        PreviousState = CurrentState;
+        CurrentState?.Exit();
+        CurrentState = state;
+        CurrentState?.Enter();
     }
 }

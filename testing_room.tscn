@@ -42,6 +42,7 @@ tile_map_data = PackedByteArray("AAD//wEAAgABAAAAAAAAAAEAAgABAAAAAAABAAEAAgACAAA
 tile_set = SubResource("TileSet_hihby")
 
 [node name="Player" parent="." instance=ExtResource("2_b3l5j")]
+position = Vector2(454, -119)
 moveSpeed = 75.0
 jumpVelocity = 200.0
 
@@ -98,3 +99,13 @@ Powerup = 5
 modulate = Color(0.211765, 0.333333, 0.501961, 1)
 position = Vector2(379, -108)
 Powerup = 8
+
+[node name="Powerups8" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(0.788235, 0.333333, 0.501961, 1)
+position = Vector2(396, -108)
+Powerup = 6
+
+[node name="Powerups9" parent="." instance=ExtResource("5_b24ak")]
+modulate = Color(0.788235, 0.333333, 0, 1)
+position = Vector2(415, -108)
+Powerup = 7

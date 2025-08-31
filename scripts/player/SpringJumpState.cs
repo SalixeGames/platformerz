@@ -2,29 +2,13 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class IdleState : State
+public partial class SpringJumpState : State
 {
     public override void Ready(StateMachine stateMachine)
     {
         base.Ready(stateMachine);
-        Name = "idle";
+        Name = "spring_jump";
         fsm = stateMachine;
-    }
-
-    public override State PhysicsUpdate(float delta)
-    {
-        base.PhysicsUpdate(delta);
-        return this;
-    }
-
-    public override State HandleInput(InputEvent @event)
-    {
-        if (@event.IsActionPressed("jump"))
-        {
-            fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity;
-            fsm.Controller.Velocity = fsm.Controller.Direction;
-        }
-        return base.HandleInput(@event);
     }
 
     public override State Update(float delta)
@@ -45,5 +29,21 @@ public partial class IdleState : State
         }
         fsm.Controller.Velocity = fsm.Controller.Direction;
         return this;
+    }
+
+    public override State HandleInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("jump"))
+        {
+            fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity * fsm.Controller.SpringJumpModif;
+            fsm.Controller.Velocity = fsm.Controller.Direction;
+            return fsm.PreviousState;
+        }
+        return base.HandleInput(@event);
+    }
+
+    public override State AnimationEnd(string animationName)
+    {
+        return fsm.States["idle"];
     }
 }

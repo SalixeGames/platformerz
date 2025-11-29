@@ -1,30 +1,31 @@
-[gd_scene load_steps=8 format=4 uid="uid://bee0dbqcgtcir"]
+[gd_scene load_steps=9 format=4 uid="uid://bee0dbqcgtcir"]
 
 [ext_resource type="PackedScene" uid="uid://bm84wsu8gms36" path="res://player.tscn" id="2_b3l5j"]
 [ext_resource type="Texture2D" uid="uid://deu5mu640yn4v" path="res://sprites/environnement_small.png" id="2_hihby"]
 [ext_resource type="PackedScene" uid="uid://cd6ev54o3e7i1" path="res://scenes/pickables/blob.tscn" id="3_hihby"]
 [ext_resource type="PackedScene" uid="uid://dchvj578mcpog" path="res://scenes/door.tscn" id="4_jqyws"]
 [ext_resource type="PackedScene" uid="uid://bcsgmbadt8yle" path="res://scenes/pickables/powerups.tscn" id="5_b24ak"]
+[ext_resource type="PackedScene" uid="uid://bu51scqvyx7vy" path="res://scenes/enemies/base_enemy.tscn" id="6_q52up"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hihby"]
 texture = ExtResource("2_hihby")
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.0174, 4.0116, 8, 4.0116, 8, 5.88848, -8, 6.41855)
-0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-3.55339, 8, 8, 8, 8, 5.88848, -4.26407, 5.78696)
-0:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-4.0689, 8, -6.7624, 7.33549, -8, 8, -8, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, 4, 8, 4, 8, 6, -6, 6)
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-4, 8, 8, 8, 8, 7, -4, 7)
+0:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-4, 8, -6, 5, -8, 6, -8, 8)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 4.06102, 8, 4.06102, 8, 5.78696, -8, 5.78696)
-1:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 6.70069, 8, 6.59916, 8, 8, -8, 8)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 4, 8, 4, 8, 6, -8, 6)
+1:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 7, 8, 7, 8, 8, -8, 8)
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.9595, 5.48238, 4.06102, 8, 6.53317, -8, 6.09153)
-2:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, -8, 6.80221, 3.55339, 6.80221, 4.26407, 8)
-2:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(6.36125, 7.3928, 8, 6.49763, 8, 8, 3.55339, 8)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 4, 6, 4, 6, 6, -8, 6)
+2:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 8, -8, 7, 4, 7, 4, 8)
+2:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(8, 6, 8, 8, 4, 8)
 0:1/0 = 0
-0:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, -3.04577, -8, -3.24882, 8)
+0:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, -3, -8, -3, 8)
 1:1/0 = 0
-1:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(3.9595, -8, 8, -8, 8, 8, 3.9595, 8)
+1:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(4, -8, 8, -8, 8, 8, 4, 8)
 2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.87323, 5.1778, -2.84272, 3.04577, -0.812204, 2.13204, -0.101526, 2.03051, 1.82746, 3.14729, 2.84271, 4.16255, 3.65492, 5.1778)
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, 5, -3, 3, -1, 2, 0, 2, 2, 3, 3, 4, 4, 5)
 
 [sub_resource type="TileSet" id="TileSet_hihby"]
 physics_layer_0/collision_layer = 2
@@ -42,7 +43,7 @@ tile_map_data = PackedByteArray("AAD//wEAAgABAAAAAAAAAAEAAgABAAAAAAABAAEAAgACAAA
 tile_set = SubResource("TileSet_hihby")
 
 [node name="Player" parent="." instance=ExtResource("2_b3l5j")]
-position = Vector2(454, -119)
+position = Vector2(-159, -682)
 moveSpeed = 75.0
 jumpVelocity = 200.0
 
@@ -109,3 +110,6 @@ Powerup = 6
 modulate = Color(0.788235, 0.333333, 0, 1)
 position = Vector2(415, -108)
 Powerup = 7
+
+[node name="BaseEnemy" parent="." instance=ExtResource("6_q52up")]
+position = Vector2(-53, -663)

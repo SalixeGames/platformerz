@@ -53,7 +53,11 @@ public partial class JumpState : State
         if (fsm.Controller.Direction.Y == 0)
         {
             fsm.Controller.Direction.Y = 0;
-            return fsm.States["spring_jump"];
+            if (GlobalScript.Instance.PowersList.Contains(GlobalScript.Powerups.SpringJump))
+            {
+                return fsm.States["spring_jump"];
+            } 
+            return fsm.States["idle"];
         }
         if (fsm.Controller.Direction.Y < 0 && _canJump)
         {

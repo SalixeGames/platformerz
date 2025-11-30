@@ -19,13 +19,18 @@ public partial class BaseEnemy : CharacterBody2D
     [ExportCategory("Stats")]
     [Export] public int BaseHealth = 100;
     [Export] public int Speed = 10;
-    public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    public float Gravity = 0.75f * ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-    private Vector2 _direction;
-    private int _lookingDirection = -1;
+    private Vector2 _direction = Vector2.Left;
+    private Vector2 _movementVector = Vector2.Zero;
+    private float _downwardsVelocity = 0.0f;
     
     public override void _Ready()
     {
+        if (Direction == EnemiesDirection.Vertical)
+        {
+            _direction = Vector2.Down;
+        }
         MyStateMachine?._Ready(this);
     }
 
@@ -46,23 +51,25 @@ public partial class BaseEnemy : CharacterBody2D
     {
         base._Process(delta);
 
-        if (IsOnWall())
+        if ((IsOnWall() && Direction == EnemiesDirection.Horizontal) || 
+            (IsOnFloor() && Direction == EnemiesDirection.Vertical))
         {
-            _lookingDirection *= -1;
-            GD.Print("Rotate");
+            _direction *= -1;
         }
         
         MyStateMachine._Process(delta);
-        _direction.X = _lookingDirection * Speed;
-        if (!IsOnFloor())
+        if (!IsOnFloor() && MovementType == EnemiesMovement.Walking)
         {
-            _direction.Y += Gravity * (float)delta;
+            _downwardsVelocity += Gravity * (float)delta;
         }
-        else
+        else if (IsOnFloor() && MovementType == EnemiesMovement.Walking)
         {
-            _direction.Y = 0;
+            _downwardsVelocity = 0;
         }
-        Velocity = _direction;
+        _movementVector = _direction * Speed;
+        _movementVector.Y += _downwardsVelocity;
+        
+        Velocity = _movementVector;
         MoveAndSlide();
     }
 }

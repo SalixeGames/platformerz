@@ -19,6 +19,9 @@ public partial class BaseEnemy : CharacterBody2D
     [ExportCategory("Stats")]
     [Export] public int BaseHealth = 100;
     [Export] public int Speed = 10;
+    [Export] public float RoamingDistance = 50.0f;
+    
+    public Vector2 SpawnPosition = Vector2.Zero;
     public float Gravity = 0.75f * ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
     private Vector2 _direction = Vector2.Left;
@@ -31,6 +34,8 @@ public partial class BaseEnemy : CharacterBody2D
         {
             _direction = Vector2.Down;
         }
+
+        SpawnPosition = GlobalPosition;
         MyStateMachine?._Ready(this);
     }
 
@@ -52,9 +57,15 @@ public partial class BaseEnemy : CharacterBody2D
         base._Process(delta);
 
         if ((IsOnWall() && Direction == EnemiesDirection.Horizontal) || 
-            (IsOnFloor() && Direction == EnemiesDirection.Vertical))
+            (IsOnFloor() && Direction == EnemiesDirection.Vertical) ||
+            Math.Abs(GlobalPosition.DistanceTo(SpawnPosition)) > RoamingDistance)
         {
             _direction *= -1;
+            if ((IsOnFloor() && Direction == EnemiesDirection.Vertical) || 
+                (IsOnWall() && Direction == EnemiesDirection.Horizontal))
+            {
+                SpawnPosition = GlobalPosition;
+            }
         }
         
         MyStateMachine._Process(delta);

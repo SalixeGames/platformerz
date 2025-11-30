@@ -13,8 +13,9 @@ public partial class BaseEnemy : CharacterBody2D
     [ExportCategory("State Machine")]
     [Export] public EnemyStateMachine MyStateMachine = new EnemyStateMachine();
     
-    [ExportCategory("Animation")]
+    [ExportCategory("Usefull Nodes")]
     [Export] public AnimationPlayer Animator;
+    [Export] public Sprite2D Sprite;
     
     [ExportCategory("Stats")]
     [Export] public int BaseHealth = 100;
@@ -35,8 +36,27 @@ public partial class BaseEnemy : CharacterBody2D
             _direction = Vector2.Down;
         }
 
+        _set_sprite_properties();
         SpawnPosition = GlobalPosition;
         MyStateMachine?._Ready(this);
+    }
+
+    private void _set_sprite_properties()
+    {
+        Sprite.Frame = (int) MovementType;
+        switch (MovementType)
+        {
+            case EnemiesMovement.Flying:
+                Animator.Play("fly_idle");
+                break;
+            case EnemiesMovement.Both:
+                Animator.Play("duo_idle");
+                break;
+            default:
+                Animator.Play("wlk_idle");
+                break;
+        }
+        Animator.Play("move");
     }
 
     public override void _PhysicsProcess(double delta)

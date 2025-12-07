@@ -10,6 +10,9 @@ public partial class BaseEnemy : CharacterBody2D
     [Export] public EnemiesAggroLevel AggroLevel = EnemiesAggroLevel.Passive;
     [Export] public EnemiesAttackType AttackType = EnemiesAttackType.Forward;
     
+    [ExportCategory("State Machine")]
+    [Export] public EnStateMachine StateMachine;
+    
     [ExportCategory("Usefull Nodes")]
     [Export] public AnimationPlayer Animator;
     [Export] public Sprite2D Sprite;
@@ -35,6 +38,7 @@ public partial class BaseEnemy : CharacterBody2D
 
         _set_sprite_properties();
         SpawnPosition = GlobalPosition;
+        StateMachine?._Ready(this);
     }
 
     private void _set_sprite_properties()
@@ -52,7 +56,6 @@ public partial class BaseEnemy : CharacterBody2D
                 Animator.Play("wlk_idle");
                 break;
         }
-        Animator.Play("move");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -64,6 +67,7 @@ public partial class BaseEnemy : CharacterBody2D
     }
 	
     public void UpdateAnim(string state) {
+        GD.Print("Playing: " + state + " for " + Name);
         Animator.Play(state);
     }
 

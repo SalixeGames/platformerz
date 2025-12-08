@@ -25,7 +25,8 @@ public partial class BaseEnemy : CharacterBody2D
     public Vector2 SpawnPosition = Vector2.Zero;
     public float Gravity = 0.75f * ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-    private Vector2 _direction = Vector2.Left;
+    public Vector2 MovementDirection = Vector2.Left;
+    public int MovementOrientation = 1;
     private Vector2 _movementVector = Vector2.Zero;
     private float _downwardsVelocity = 0.0f;
     
@@ -33,7 +34,7 @@ public partial class BaseEnemy : CharacterBody2D
     {
         if (Direction == EnemiesDirection.Vertical)
         {
-            _direction = Vector2.Down;
+            MovementDirection = Vector2.Down;
         }
 
         _set_sprite_properties();
@@ -67,7 +68,6 @@ public partial class BaseEnemy : CharacterBody2D
     }
 	
     public void UpdateAnim(string state) {
-        GD.Print("Playing: " + state + " for " + Name);
         Animator.Play(state);
     }
 
@@ -75,13 +75,17 @@ public partial class BaseEnemy : CharacterBody2D
     {
         base._Process(delta);
 
-        if ((IsOnWall() && Direction == EnemiesDirection.Horizontal) || 
-            (IsOnFloor() && Direction == EnemiesDirection.Vertical) ||
+        if ((IsOnWall() && MovementDirection.X != 0) || 
+            (IsOnFloor() && MovementDirection.Y != 0) ||
             Math.Abs(GlobalPosition.DistanceTo(SpawnPosition)) > RoamingDistance)
         {
-            _direction *= -1;
-            if ((IsOnFloor() && Direction == EnemiesDirection.Vertical) || 
-                (IsOnWall() && Direction == EnemiesDirection.Horizontal))
+            if (MovementType == EnemiesMovement.Both)
+            {
+                GD.Print("1 " + (Direction));
+            }
+            MovementOrientation *= -1;
+            if ((IsOnFloor() && MovementDirection.Y != 0) || 
+                (IsOnWall() && MovementDirection.X != 0))
             {
                 SpawnPosition = GlobalPosition;
             }
@@ -95,9 +99,10 @@ public partial class BaseEnemy : CharacterBody2D
         {
             _downwardsVelocity = 0;
         }
-        _movementVector = _direction * Speed;
+        _movementVector = MovementDirection * MovementOrientation * Speed;
         _movementVector.Y += _downwardsVelocity;
         
+        StateMachine._Process(delta);
         Velocity = _movementVector;
         MoveAndSlide();
     }

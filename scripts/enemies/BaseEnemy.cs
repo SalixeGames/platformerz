@@ -64,6 +64,8 @@ public partial class BaseEnemy : CharacterBody2D
         if (Position.Y > 600)
             QueueFree();
         
+        Scale = new Vector2(MovementOrientation, 1);
+        Rotation = 0;
         MoveAndSlide();
     }
 	
@@ -81,7 +83,6 @@ public partial class BaseEnemy : CharacterBody2D
         {
             if (MovementType == EnemiesMovement.Both)
             {
-                GD.Print("1 " + (Direction));
             }
             MovementOrientation *= -1;
             if ((IsOnFloor() && MovementDirection.Y != 0) || 
@@ -105,5 +106,10 @@ public partial class BaseEnemy : CharacterBody2D
         StateMachine._Process(delta);
         Velocity = _movementVector;
         MoveAndSlide();
+    }
+
+    void _on_vision_area_entered(Area2D area)
+    {
+        GD.Print("Hello there!");
     }
 }

@@ -274,9 +274,9 @@ libraries = {
 collision_layer = 16
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision"]
-polygon = PackedVector2Array(0, 0, -42, -42, -42, 6, -6, 6)
+polygon = PackedVector2Array(0, 0, -78.0105, -42.0056, -78.0105, 6.0008, -6, 6)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, -42, -42, -42, 6, -6, 6)
+polygon = PackedVector2Array(0, 0, -78.0105, -42.0056, -78.0105, 6.0008, -6, 6)
 
 [connection signal="area_entered" from="Vision" to="." method="_on_vision_area_entered"]

@@ -43,7 +43,7 @@ tile_map_data = PackedByteArray("AAD//wEAAgABAAAAAAAAAAEAAgABAAAAAAABAAEAAgACAAA
 tile_set = SubResource("TileSet_hihby")
 
 [node name="Player" parent="." instance=ExtResource("2_b3l5j")]
-position = Vector2(136, -72)
+position = Vector2(12, -702)
 moveSpeed = 75.0
 jumpVelocity = 200.0
 
@@ -113,13 +113,3 @@ Powerup = 7
 
 [node name="BaseEnemy" parent="." instance=ExtResource("6_q52up")]
 position = Vector2(-56, -664)
-
-[node name="BaseEnemy2" parent="." instance=ExtResource("6_q52up")]
-position = Vector2(-19, -694)
-MovementType = 1
-Direction = 0
-
-[node name="BaseEnemy3" parent="." instance=ExtResource("6_q52up")]
-position = Vector2(48, 72)
-MovementType = 2
-Direction = 0

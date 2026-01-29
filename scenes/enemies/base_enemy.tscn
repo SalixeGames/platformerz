@@ -42,34 +42,6 @@ tracks/2/keys = {
 "values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_n2ebm"]
-resource_name = "back"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 21.1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.75, 1.25), Vector2(0.5, 1.33)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionPolygon2D:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 21.1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.75, 1.25), Vector2(0.5, 1.33)]
-}
-
 [sub_resource type="Animation" id="Animation_2t7ph"]
 resource_name = "dash"
 tracks/0/type = "value"
@@ -235,12 +207,40 @@ tracks/1/keys = {
 "values": [PackedVector2Array(-6, -6, -4, -6, -3, -6, -2, -6, -1, -6, 1, -6, 6, -6, 6, -5, 6, -4, 6, -3, 6, -1, 6, 1, 6, 6, 5, 6, 4, 6, 3, 6, 1, 6, -1, 6, -6, 6, -6, 1, -6, -1, -6, -3, -6, -4, -6, -5)]
 }
 
+[sub_resource type="Animation" id="Animation_n2ebm"]
+resource_name = "flee"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 21.1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.75, 1.25), Vector2(0.5, 1.33)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 21.1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.75, 1.25), Vector2(0.5, 1.33)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ylyo2"]
 _data = {
 &"RESET": SubResource("Animation_qf3h2"),
-&"back": SubResource("Animation_n2ebm"),
 &"dash": SubResource("Animation_2t7ph"),
 &"duo_idle": SubResource("Animation_n763p"),
+&"flee": SubResource("Animation_n2ebm"),
 &"fly_idle": SubResource("Animation_lkvl6"),
 &"move": SubResource("Animation_ylyo2"),
 &"shoot": SubResource("Animation_i1su5"),

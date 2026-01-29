@@ -25,15 +25,17 @@ public partial class EnStateMachine : Resource
     {
         Controller = controller;
         
+        visionArea.AreaEntered += OnPlayerInVision;
+        visionArea.AreaExited += OnPlayerOutVision;
         EnStates = new System.Collections.Generic.Dictionary<string, EnState>();
         EnStatesList.Add(new MoveState());
+        EnStatesList.Add(new FleeState());
         
         foreach (EnState enState in EnStatesList) {
             enState.Ready(this);
             EnStates.Add(enState.Name, enState);
             EnStates[enState.Name] = enState;
             enState.Controller = Controller;
-            visionArea.AreaEntered += enState.OnPlayerInVision;
             enState.Enter(); // reset
             enState.Exit(); // reset
         }
@@ -68,5 +70,15 @@ public partial class EnStateMachine : Resource
         CurrentState?.Exit();
         CurrentState = enState;
         CurrentState?.Enter();
+    }
+    
+    public void OnPlayerInVision(Area2D visionArea)
+    {
+        TransitionTo(CurrentState?.OnPlayerInVision(visionArea));
+    }
+
+    public void OnPlayerOutVision(Area2D visionArea)
+    {
+        TransitionTo(CurrentState?.OnPlayerOutVision(visionArea));
     }
 }

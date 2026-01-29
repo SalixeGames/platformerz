@@ -16,6 +16,12 @@ public partial class MoveState : EnState
         fsm = stateMachine;
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        GD.Print("Enter");
+    }
+
     public override EnState Update(float delta)
     {
         if (Controller.MovementType == EnemiesMovement.Both)
@@ -35,5 +41,11 @@ public partial class MoveState : EnState
             }
         }
         return base.Update(delta);
+    }
+
+    public override EnState OnPlayerInVision(Area2D visionArea)
+    {
+        base.OnPlayerInVision(visionArea);
+        return fsm.EnStates["flee"];
     }
 }

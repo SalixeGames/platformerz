@@ -34,10 +34,15 @@ public partial class EnState : Resource
 		return this;
 	}
 
-	public virtual void OnPlayerInVision(Area2D visionArea)
+	public virtual EnState OnPlayerInVision(Area2D visionArea)
 	{
 		GD.Print(Name + " has player entered");
-		Controller.Free();
-		
+		return this;
+	}
+
+	public virtual EnState OnPlayerOutVision(Area2D visionArea)
+	{
+		GD.Print(Name + " has player exited");
+		return this;
 	}
 }

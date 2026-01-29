@@ -112,4 +112,4 @@ position = Vector2(415, -108)
 Powerup = 7
 
 [node name="BaseEnemy" parent="." instance=ExtResource("6_q52up")]
-position = Vector2(-56, -664)
+position = Vector2(-60, -690)

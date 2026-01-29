@@ -16,6 +16,7 @@ public partial class BaseEnemy : CharacterBody2D
     [ExportCategory("Usefull Nodes")]
     [Export] public AnimationPlayer Animator;
     [Export] public Sprite2D Sprite;
+    [Export] public Area2D EnVisionArea;
     
     [ExportCategory("Stats")]
     [Export] public int BaseHealth = 100;
@@ -39,7 +40,7 @@ public partial class BaseEnemy : CharacterBody2D
 
         _set_sprite_properties();
         SpawnPosition = GlobalPosition;
-        StateMachine?._Ready(this);
+        StateMachine?._Ready(this, EnVisionArea);
     }
 
     private void _set_sprite_properties()
@@ -106,10 +107,5 @@ public partial class BaseEnemy : CharacterBody2D
         StateMachine._Process(delta);
         Velocity = _movementVector;
         MoveAndSlide();
-    }
-
-    void _on_vision_area_entered(Area2D area)
-    {
-        GD.Print("Hello there!");
     }
 }

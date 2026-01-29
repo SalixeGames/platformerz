@@ -22,7 +22,7 @@ public partial class EnStateMachine : Resource
     {
     }
 
-    public void _Ready(BaseEnemy controller)
+    public void _Ready(BaseEnemy controller, Area2D visionArea)
     {
         Controller = controller;
         
@@ -39,6 +39,7 @@ public partial class EnStateMachine : Resource
             EnStates.Add(enState.Name, enState);
             EnStates[enState.Name] = enState;
             enState.Controller = Controller;
+            visionArea.AreaEntered += enState.OnPlayerInVision;
             enState.Enter(); // reset
             enState.Exit(); // reset
         }

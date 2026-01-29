@@ -8,8 +8,7 @@ namespace Platformerz.scripts.enemies;
 [GlobalClass]
 public partial class EnStateMachine : Resource
 {
-    [Export]
-    public Array<EnState> EnStatesList;
+    public Array<EnState> EnStatesList = new Array<EnState>();
     
     public System.Collections.Generic.Dictionary<string, EnState> EnStates;
     public EnState CurrentState;
@@ -27,12 +26,7 @@ public partial class EnStateMachine : Resource
         Controller = controller;
         
         EnStates = new System.Collections.Generic.Dictionary<string, EnState>();
-        if (EnStatesList?.Count == null)
-        {
-            EnStatesList = new Array<EnState>();
-            // EnStatesList.Add(new IdleState());
-            // EnStatesList.Add(new WalkState());
-        }
+        EnStatesList.Add(new MoveState());
         
         foreach (EnState enState in EnStatesList) {
             enState.Ready(this);

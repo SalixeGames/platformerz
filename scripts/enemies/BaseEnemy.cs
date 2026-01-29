@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using Platformerz.scripts.enemies;
 
 public partial class BaseEnemy : CharacterBody2D
@@ -11,7 +12,7 @@ public partial class BaseEnemy : CharacterBody2D
     [Export] public EnemiesAttackType AttackType = EnemiesAttackType.Forward;
     
     [ExportCategory("State Machine")]
-    [Export] public EnStateMachine StateMachine;
+    public EnStateMachine StateMachine = new EnStateMachine();
     
     [ExportCategory("Usefull Nodes")]
     [Export] public AnimationPlayer Animator;

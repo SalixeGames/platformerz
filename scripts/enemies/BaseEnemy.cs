@@ -42,6 +42,7 @@ public partial class BaseEnemy : CharacterBody2D
         if (MovementType != EnemiesMovement.Walking || IsOnFloor())
         {
             SpawnPosition = GlobalPosition;
+            Home.GlobalPosition = SpawnPosition;
         }
         StateMachine?._Ready(this, EnVisionArea);
     }

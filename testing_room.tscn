@@ -115,12 +115,28 @@ Powerup = 7
 position = Vector2(-72, -690)
 Home = NodePath("../Polygon2D2")
 
+[node name="BaseEnemy2" parent="." node_paths=PackedStringArray("Home") instance=ExtResource("6_q52up")]
+position = Vector2(324, -720)
+MovementType = 1
+Home = NodePath("../Polygon2D3")
+
+[node name="BaseEnemy3" parent="." node_paths=PackedStringArray("Home") instance=ExtResource("6_q52up")]
+position = Vector2(84, -636)
+MovementType = 1
+Direction = 0
+Home = NodePath("../Polygon2D4")
+
 [node name="Polygon2D2" type="Polygon2D" parent="."]
 scale = Vector2(47.2062, 2.84025)
 color = Color(1, 0.105882, 1, 1)
 polygon = PackedVector2Array(-0.127119, -2.11278, 0.127119, -2.11278, 0.127119, 2.11278, -0.127119, 2.11278)
 
 [node name="Polygon2D3" type="Polygon2D" parent="."]
+scale = Vector2(47.2062, 2.84025)
+color = Color(1, 0.105882, 1, 1)
+polygon = PackedVector2Array(-0.127119, -2.11278, 0.127119, -2.11278, 0.127119, 2.11278, -0.127119, 2.11278)
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
 scale = Vector2(47.2062, 2.84025)
 color = Color(1, 0.105882, 1, 1)
 polygon = PackedVector2Array(-0.127119, -2.11278, 0.127119, -2.11278, 0.127119, 2.11278, -0.127119, 2.11278)

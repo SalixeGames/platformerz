@@ -17,11 +17,11 @@ public partial class FleeState : EnState
     public override void Enter()
     {
         base.Enter();
-        GD.Print("Ready to flee");
     }
 
     public override EnState OnPlayerOutVision(Area2D visionArea)
     {
+        base.OnPlayerOutVision(visionArea);
         return fsm.EnStates["move"];
     }
 }

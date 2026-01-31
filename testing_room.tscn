@@ -43,7 +43,7 @@ tile_map_data = PackedByteArray("AAD//wEAAgABAAAAAAAAAAEAAgABAAAAAAABAAEAAgACAAA
 tile_set = SubResource("TileSet_hihby")
 
 [node name="Player" parent="." instance=ExtResource("2_b3l5j")]
-position = Vector2(12, -702)
+position = Vector2(36, -678)
 moveSpeed = 75.0
 jumpVelocity = 200.0
 
@@ -111,8 +111,16 @@ modulate = Color(0.788235, 0.333333, 0, 1)
 position = Vector2(415, -108)
 Powerup = 7
 
-[node name="BaseEnemy" parent="." instance=ExtResource("6_q52up")]
+[node name="BaseEnemy" parent="." node_paths=PackedStringArray("Home") instance=ExtResource("6_q52up")]
 position = Vector2(-72, -690)
+Home = NodePath("../Polygon2D2")
 
-[node name="BaseEnemy2" parent="." instance=ExtResource("6_q52up")]
-position = Vector2(192, -690)
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+scale = Vector2(47.2062, 2.84025)
+color = Color(1, 0.105882, 1, 1)
+polygon = PackedVector2Array(-0.127119, -2.11278, 0.127119, -2.11278, 0.127119, 2.11278, -0.127119, 2.11278)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+scale = Vector2(47.2062, 2.84025)
+color = Color(1, 0.105882, 1, 1)
+polygon = PackedVector2Array(-0.127119, -2.11278, 0.127119, -2.11278, 0.127119, 2.11278, -0.127119, 2.11278)

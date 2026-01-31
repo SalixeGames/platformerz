@@ -19,7 +19,6 @@ public partial class MoveState : EnState
     public override void Enter()
     {
         base.Enter();
-        GD.Print("Enter");
     }
 
     public override EnState Update(float delta)

@@ -18,6 +18,7 @@ public partial class BaseEnemy : CharacterBody2D
     [Export] public AnimationPlayer Animator;
     [Export] public Sprite2D Sprite;
     [Export] public Area2D EnVisionArea;
+    [Export] public Polygon2D Home;
     
     [ExportCategory("Stats")]
     [Export] public int BaseHealth = 100;
@@ -25,12 +26,10 @@ public partial class BaseEnemy : CharacterBody2D
     [Export] public float RoamingDistance = 50.0f;
     
     public Vector2 SpawnPosition = Vector2.Zero;
+    public Vector2 OldSpawnPosition = Vector2.Zero;
     public float Gravity = 0.75f * ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-    public Vector2 MovementDirection = Vector2.Left;
-    public int MovementOrientation = 1;
-    private Vector2 _movementVector = Vector2.Zero;
-    private float _downwardsVelocity = 0.0f;
+    public Vector2 MovementDirection = Vector2.Right;
     
     public override void _Ready()
     {
@@ -40,7 +39,10 @@ public partial class BaseEnemy : CharacterBody2D
         }
 
         _set_sprite_properties();
-        SpawnPosition = GlobalPosition;
+        if (MovementType != EnemiesMovement.Walking || IsOnFloor())
+        {
+            SpawnPosition = GlobalPosition;
+        }
         StateMachine?._Ready(this, EnVisionArea);
     }
 
@@ -66,8 +68,6 @@ public partial class BaseEnemy : CharacterBody2D
         if (Position.Y > 600)
             QueueFree();
         
-        Scale = new Vector2(MovementOrientation, 1);
-        Rotation = 0;
         MoveAndSlide();
     }
 	
@@ -79,34 +79,46 @@ public partial class BaseEnemy : CharacterBody2D
     {
         base._Process(delta);
 
-        if ((IsOnWall() && MovementDirection.X != 0) || 
-            (IsOnFloor() && MovementDirection.Y != 0) ||
-            Math.Abs(GlobalPosition.DistanceTo(SpawnPosition)) > RoamingDistance)
+        if (NeedTurnAround())
         {
-            if (MovementType == EnemiesMovement.Both)
-            {
-            }
-            MovementOrientation *= -1;
-            if ((IsOnFloor() && MovementDirection.Y != 0) || 
-                (IsOnWall() && MovementDirection.X != 0))
-            {
-                SpawnPosition = GlobalPosition;
-            }
+            MovementDirection *= -1;
         }
         
         if (!IsOnFloor() && MovementType == EnemiesMovement.Walking)
         {
-            _downwardsVelocity += Gravity * (float)delta;
+            MovementDirection.Y += (Gravity * (float)delta) / Speed;
+            if (OldSpawnPosition == Vector2.Zero)
+                SpawnPosition = GlobalPosition;
         }
         else if (IsOnFloor() && MovementType == EnemiesMovement.Walking)
         {
-            _downwardsVelocity = 0;
+            MovementDirection.Y = 0;
         }
-        _movementVector = MovementDirection * MovementOrientation * Speed;
-        _movementVector.Y += _downwardsVelocity;
+        
+        if (IsOnFloor() && OldSpawnPosition == Vector2.Zero)
+        {
+            OldSpawnPosition = SpawnPosition;
+            SpawnPosition = GlobalPosition;
+        }
+        if (SpawnPosition != OldSpawnPosition && IsOnFloor())
+        {
+            OldSpawnPosition = SpawnPosition;
+            Home.GlobalPosition = SpawnPosition;
+        }
+
+        Scale = new Vector2(MovementDirection.X != 0 ? -MovementDirection.X : 1, 1);
+        Rotation = 0;
         
         StateMachine._Process(delta);
-        Velocity = _movementVector;
+        Velocity = (MovementDirection * Speed);
         MoveAndSlide();
+    }
+
+    public bool NeedTurnAround()
+    {
+        bool onWallAndHorizontal = IsOnWall() && MovementDirection.X != 0;
+        bool onFloorAndVertical = IsOnFloor() && MovementDirection.Y != 0;
+        bool tooFar = Math.Abs(GlobalPosition.DistanceTo(SpawnPosition)) > RoamingDistance;
+        return onWallAndHorizontal || onFloorAndVertical || tooFar;
     }
 }

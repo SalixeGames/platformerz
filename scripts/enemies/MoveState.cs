@@ -45,6 +45,7 @@ public partial class MoveState : EnState
     public override EnState OnPlayerInVision(Area2D visionArea)
     {
         base.OnPlayerInVision(visionArea);
+        fsm.EnStates["flee"].Target = visionArea;
         return fsm.EnStates["flee"];
     }
 }

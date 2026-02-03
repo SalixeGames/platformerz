@@ -106,9 +106,6 @@ public partial class BaseEnemy : CharacterBody2D
             OldSpawnPosition = SpawnPosition;
             Home.GlobalPosition = SpawnPosition;
         }
-
-        Scale = new Vector2(MovementDirection.X != 0 ? -MovementDirection.X : 1, 1);
-        Rotation = 0;
         
         StateMachine._Process(delta);
         Velocity = (MovementDirection * Speed);

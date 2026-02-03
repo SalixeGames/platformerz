@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Platformerz.scripts.player;
 
 namespace Platformerz.scripts.enemies;
 
@@ -9,6 +10,7 @@ public partial class EnState : Resource
 	[Export] public string Name;
 	public EnStateMachine fsm;
 	public BaseEnemy Controller;
+	public Area2D Target;
 
 	public virtual void Enter()
 	{

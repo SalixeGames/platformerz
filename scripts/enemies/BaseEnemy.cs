@@ -18,7 +18,6 @@ public partial class BaseEnemy : CharacterBody2D
     [Export] public AnimationPlayer Animator;
     [Export] public Sprite2D Sprite;
     [Export] public Area2D EnVisionArea;
-    [Export] public Polygon2D Home;
     
     [ExportCategory("Stats")]
     [Export] public int BaseHealth = 100;
@@ -30,6 +29,7 @@ public partial class BaseEnemy : CharacterBody2D
     public float Gravity = 0.75f * ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
     public Vector2 MovementDirection = Vector2.Right;
+    private DateTime _lastBumpTime = DateTime.MinValue;
     
     public override void _Ready()
     {
@@ -39,11 +39,7 @@ public partial class BaseEnemy : CharacterBody2D
         }
 
         _set_sprite_properties();
-        if (MovementType != EnemiesMovement.Walking || IsOnFloor())
-        {
-            SpawnPosition = GlobalPosition;
-            Home.GlobalPosition = SpawnPosition;
-        }
+        if (MovementType != EnemiesMovement.Walking || IsOnFloor()) SpawnPosition = GlobalPosition;
         StateMachine?._Ready(this, EnVisionArea);
     }
 
@@ -80,7 +76,12 @@ public partial class BaseEnemy : CharacterBody2D
     {
         base._Process(delta);
 
-        if (NeedTurnAround())
+        if (Math.Abs(GlobalPosition.DistanceTo(SpawnPosition)) > RoamingDistance && _lastBumpTime < DateTime.Now - TimeSpan.FromSeconds(2))
+        {
+            SetDirToTarget(SpawnPosition);
+        }
+
+        if (BumbedOnSurface())
         {
             MovementDirection *= -1;
         }
@@ -101,22 +102,31 @@ public partial class BaseEnemy : CharacterBody2D
             OldSpawnPosition = SpawnPosition;
             SpawnPosition = GlobalPosition;
         }
-        if (SpawnPosition != OldSpawnPosition && IsOnFloor())
-        {
-            OldSpawnPosition = SpawnPosition;
-            Home.GlobalPosition = SpawnPosition;
-        }
+        if (SpawnPosition != OldSpawnPosition && IsOnFloor()) OldSpawnPosition = SpawnPosition;
         
         StateMachine._Process(delta);
         Velocity = (MovementDirection * Speed);
         MoveAndSlide();
     }
 
-    public bool NeedTurnAround()
+    public bool BumbedOnSurface()
     {
         bool onWallAndHorizontal = IsOnWall() && MovementDirection.X != 0;
         bool onFloorAndVertical = IsOnFloor() && MovementDirection.Y != 0;
-        bool tooFar = Math.Abs(GlobalPosition.DistanceTo(SpawnPosition)) > RoamingDistance;
-        return onWallAndHorizontal || onFloorAndVertical || tooFar;
+        return onWallAndHorizontal || onFloorAndVertical;
+    }
+
+    // Set Direction toward a targer (Vector 2D, a point in space)
+    public void SetDirToTarget(Vector2 target, bool inverted = false)
+    {
+        Vector2 targetDir = GlobalPosition.DirectionTo(target).Normalized();
+        _lastBumpTime = DateTime.Now;
+        
+        if (inverted) targetDir = targetDir * -1;
+        
+        if (Direction == EnemiesDirection.Horizontal)
+            MovementDirection = targetDir.X < 0 ? Vector2.Left :  Vector2.Right;
+        else
+            MovementDirection = targetDir.Y < 0 ? Vector2.Up :  Vector2.Down;
     }
 }

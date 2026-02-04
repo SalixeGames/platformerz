@@ -21,12 +21,7 @@ public partial class FleeState : EnState
             Controller.MovementDirection *= -1;
         else
         {
-            Vector2 targetDir = Controller.GlobalPosition.DirectionTo(Target.GlobalPosition).Normalized();
-            
-            if (Controller.Direction == EnemiesDirection.Horizontal && targetDir.X < 0)
-                Controller.MovementDirection = targetDir.X > 0 ? Vector2.Left :  Vector2.Right;
-            else
-                Controller.MovementDirection = targetDir.Y > 0 ? Vector2.Up :  Vector2.Down;
+            Controller.SetDirToTarget(Target.GlobalPosition, true);
         }
     }
 

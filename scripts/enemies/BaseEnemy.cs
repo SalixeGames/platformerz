@@ -76,14 +76,17 @@ public partial class BaseEnemy : CharacterBody2D
     {
         base._Process(delta);
 
-        if (Math.Abs(GlobalPosition.DistanceTo(SpawnPosition)) > RoamingDistance && _lastBumpTime < DateTime.Now - TimeSpan.FromSeconds(2))
+        if (
+            Math.Abs(GlobalPosition.DistanceTo(SpawnPosition)) > RoamingDistance && 
+            _lastBumpTime < DateTime.Now - TimeSpan.FromSeconds(2)
+            )
         {
-            SetDirToTarget(SpawnPosition);
+            GoTowardSpawn();
         }
 
         if (BumbedOnSurface())
         {
-            MovementDirection *= -1;
+            Flip();
         }
         
         if (!IsOnFloor() && MovementType == EnemiesMovement.Walking)
@@ -128,5 +131,23 @@ public partial class BaseEnemy : CharacterBody2D
             MovementDirection = targetDir.X < 0 ? Vector2.Left :  Vector2.Right;
         else
             MovementDirection = targetDir.Y < 0 ? Vector2.Up :  Vector2.Down;
+    }
+
+    public void Flip()
+    {
+        SetScale(new Vector2(-Scale.X, Scale.Y));
+    }
+
+    public void GoTowardSpawn()
+    {
+        SetDirToTarget(SpawnPosition);
+        LookAtSpawn();
+    }
+    
+    public void LookAtSpawn()
+    {
+        Vector2 targetDir = GlobalPosition.DirectionTo(SpawnPosition).Normalized();
+        SetScale(new Vector2(targetDir.X <= 0 ? 1 : -1, 1));
+        SetRotation(0);
     }
 }

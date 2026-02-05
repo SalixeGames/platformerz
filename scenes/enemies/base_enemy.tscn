@@ -188,7 +188,6 @@ _data = {
 }
 
 [node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("Animator", "Sprite", "EnVisionArea")]
-scale = Vector2(0.999866, 0.999866)
 collision_layer = 16
 collision_mask = 103
 script = ExtResource("1_qf3h2")

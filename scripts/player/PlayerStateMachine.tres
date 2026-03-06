@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="StateMachine" load_steps=27 format=3 uid="uid://crqg7fxtcln4v"]
+[gd_resource type="Resource" script_class="StateMachine" format=3 uid="uid://crqg7fxtcln4v"]
 
-[ext_resource type="Script" uid="uid://douoe7o0k4vk5" path="res://scripts/states/State.cs" id="1_2n7j7"]
 [ext_resource type="Script" uid="uid://d4cieyjrmhbok" path="res://scripts/player/IdleState.cs" id="2_b7hct"]
 [ext_resource type="Script" uid="uid://c3qdgljktl53t" path="res://scripts/player/WalkState.cs" id="3_qx0jv"]
 [ext_resource type="Script" uid="uid://b5r8a2jkyjqj8" path="res://scripts/player/JumpState.cs" id="4_b7hct"]
@@ -17,63 +16,51 @@
 
 [sub_resource type="Resource" id="Resource_3qbpp"]
 script = ExtResource("2_b7hct")
-Name = ""
 
 [sub_resource type="Resource" id="Resource_ln1qm"]
 script = ExtResource("3_qx0jv")
-Name = ""
 
 [sub_resource type="Resource" id="Resource_qx0jv"]
 script = ExtResource("4_b7hct")
-Name = ""
 metadata/_custom_type_script = "uid://b5r8a2jkyjqj8"
 
 [sub_resource type="Resource" id="Resource_efcaa"]
 script = ExtResource("5_qx0jv")
-Name = ""
 metadata/_custom_type_script = "uid://dy2waba1tf7c5"
 
 [sub_resource type="Resource" id="Resource_kxt71"]
 script = ExtResource("6_efcaa")
-Name = ""
 metadata/_custom_type_script = "uid://cvv3ic3wjtef8"
 
 [sub_resource type="Resource" id="Resource_ir0a2"]
 script = ExtResource("7_3qbpp")
-Name = ""
 metadata/_custom_type_script = "uid://dat1s40gkqwcr"
 
 [sub_resource type="Resource" id="Resource_fjmoq"]
 script = ExtResource("8_ln1qm")
-Name = ""
 metadata/_custom_type_script = "uid://bf3caug1a216v"
 
 [sub_resource type="Resource" id="Resource_oikov"]
 script = ExtResource("9_kxt71")
-Name = ""
 metadata/_custom_type_script = "uid://b1eolh8443c5l"
 
 [sub_resource type="Resource" id="Resource_ohlok"]
 script = ExtResource("10_ir0a2")
-Name = ""
 metadata/_custom_type_script = "uid://i61i4pjrak6g"
 
 [sub_resource type="Resource" id="Resource_geimi"]
 script = ExtResource("11_oikov")
-Name = ""
 metadata/_custom_type_script = "uid://dmfl8ljbs0tpm"
 
 [sub_resource type="Resource" id="Resource_n53j5"]
 script = ExtResource("12_ohlok")
-Name = ""
 metadata/_custom_type_script = "uid://cm5w7slr4sgrj"
 
 [sub_resource type="Resource" id="Resource_jb7vn"]
 script = ExtResource("13_ohlok")
-Name = ""
 metadata/_custom_type_script = "uid://d0fu7mv628or7"
 
 [resource]
 script = ExtResource("4_efcaa")
-StatesList = Array[ExtResource("1_2n7j7")]([SubResource("Resource_3qbpp"), SubResource("Resource_ln1qm"), SubResource("Resource_qx0jv"), SubResource("Resource_efcaa"), SubResource("Resource_kxt71"), SubResource("Resource_ir0a2"), SubResource("Resource_fjmoq"), SubResource("Resource_oikov"), SubResource("Resource_ohlok"), SubResource("Resource_geimi"), SubResource("Resource_n53j5"), SubResource("Resource_jb7vn")])
+StatesList = [SubResource("Resource_3qbpp"), SubResource("Resource_ln1qm"), SubResource("Resource_qx0jv"), SubResource("Resource_efcaa"), SubResource("Resource_kxt71"), SubResource("Resource_ir0a2"), SubResource("Resource_fjmoq"), SubResource("Resource_oikov"), SubResource("Resource_ohlok"), SubResource("Resource_geimi"), SubResource("Resource_n53j5"), SubResource("Resource_jb7vn")]
 metadata/_custom_type_script = "uid://befq8hk8eaa6a"

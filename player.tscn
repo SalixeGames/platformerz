@@ -1,14 +1,19 @@
-[gd_scene load_steps=32 format=3 uid="uid://bm84wsu8gms36"]
+[gd_scene format=3 uid="uid://bm84wsu8gms36"]
 
 [ext_resource type="Script" uid="uid://bvpu6x8t7eeer" path="res://scripts/player/PlayerController.cs" id="1_onrkg"]
 [ext_resource type="Resource" uid="uid://crqg7fxtcln4v" path="res://scripts/player/PlayerStateMachine.tres" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://ble8qvrvlupab" path="res://sprites/player/player_sprite_sheet_small.png" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://cr7xftn77e7wm" path="res://scripts/tools/HurtBox.cs" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://c81g40hmqdoac" path="res://Hud.cs" id="5_sweqy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
 radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sweqy"]
+radius = 6.0
 
 [sub_resource type="Animation" id="Animation_4flbx"]
 length = 0.001
@@ -1364,52 +1369,78 @@ _data = {
 &"wall_slide_right": SubResource("Animation_ivps1")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Animator")]
+[node name="Player" type="CharacterBody2D" unique_id=1497020429 node_paths=PackedStringArray("Animator")]
 collision_mask = 127
 script = ExtResource("1_onrkg")
 moveSpeed = 300.0
 stateMachine = ExtResource("2_i3pqv")
 Animator = NodePath("AnimationPlayer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hud" type="Control" parent="." unique_id=30693825 node_paths=PackedStringArray("HealthLabel")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -310.0
+offset_top = -168.0
+offset_right = -100.0
+offset_bottom = -107.0
+script = ExtResource("5_sweqy")
+HealthLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="Hud" unique_id=141002033]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 50.0
+offset_bottom = 31.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1672560554]
 rotation = 1.5708
 shape = SubResource("CircleShape2D_4flbx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=411136845]
 texture_filter = 1
 texture = ExtResource("3_i3pqv")
 hframes = 8
 vframes = 11
 frame = 15
 
-[node name="AreaContainer" type="Node2D" parent="."]
+[node name="AreaContainer" type="Node2D" parent="." unique_id=409973981]
 
-[node name="CeilingCollider" type="Area2D" parent="AreaContainer"]
+[node name="CeilingCollider" type="Area2D" parent="AreaContainer" unique_id=1167601945]
+visible = false
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/CeilingCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/CeilingCollider" unique_id=1734362604]
 shape = SubResource("CircleShape2D_i3pqv")
 
-[node name="WallCollider" type="Area2D" parent="AreaContainer"]
+[node name="WallCollider" type="Area2D" parent="AreaContainer" unique_id=1425175692]
+visible = false
 collision_layer = 0
 collision_mask = 64
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/WallCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/WallCollider" unique_id=1756794625]
 shape = SubResource("CircleShape2D_i3pqv")
 
-[node name="Floor" type="Area2D" parent="AreaContainer"]
+[node name="Floor" type="Area2D" parent="AreaContainer" unique_id=209973834]
+visible = false
 collision_layer = 0
 collision_mask = 10
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/Floor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/Floor" unique_id=1557785226]
 shape = SubResource("CircleShape2D_i3pqv")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="AreaContainer" unique_id=1267289277]
+collision_layer = 2048
+collision_mask = 256
+script = ExtResource("4_hqtel")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hqtel")
-}
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/HurtBox" unique_id=1288552133]
+shape = SubResource("CircleShape2D_sweqy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1791256255]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1236501526]
+libraries/ = SubResource("AnimationLibrary_hqtel")
 
 [connection signal="body_entered" from="AreaContainer/CeilingCollider" to="." method="_on_ceiling_entered"]
 [connection signal="body_exited" from="AreaContainer/CeilingCollider" to="." method="_on_ceiling_left"]
@@ -1418,4 +1449,6 @@ libraries = {
 [connection signal="area_entered" from="AreaContainer/Floor" to="." method="_on_drop_area_entered"]
 [connection signal="body_entered" from="AreaContainer/Floor" to="." method="_on_floor_entered"]
 [connection signal="body_exited" from="AreaContainer/Floor" to="." method="_on_floor_left"]
+[connection signal="HurtBoxHit" from="AreaContainer/HurtBox" to="." method="_on_hurt_hit"]
+[connection signal="HurtBoxHit" from="AreaContainer/HurtBox" to="Hud" method="_on_hurt_box_hit"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

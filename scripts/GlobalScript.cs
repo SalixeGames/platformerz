@@ -6,13 +6,15 @@ using Array = System.Array;
 
 public partial class GlobalScript : Node
 {
-    public static GlobalScript Instance { get; set; }
 
     private static string _savingPath = "res://";
 
-    public int Health { get; set; }
+    public float Health { get; set; }
+    private const float BaseHealth = 100.0f;
     
     public Array<int> BlobsList { get; set; } = new Array<int>();
+    
+    public static GlobalScript Instance { get; set; }
     
     public enum Powerups
     {
@@ -54,6 +56,7 @@ public partial class GlobalScript : Node
         }
         _SetMetadata(data);
         
+        EmitSignal(SignalName.DataLoaded);
         GD.Print("Game " + saveFileId + " loaded.");
     }
 
@@ -75,11 +78,11 @@ public partial class GlobalScript : Node
     {
         if (!data.ContainsKey("Health"))
         {
-            Health = 0;
+            Health = BaseHealth;
         }
         else
         {
-            Health = data["Health"].ToInt();
+            Health = data["Health"].ToFloat();
         }
 
         if (!data.ContainsKey("BlobsList"))
@@ -109,4 +112,7 @@ public partial class GlobalScript : Node
             }
         }
     }
+    
+    [Signal]
+    public delegate void DataLoadedEventHandler();
 }

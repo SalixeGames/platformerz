@@ -128,6 +128,10 @@ sprint={
 2d_physics/layer_6="projectile"
 2d_physics/layer_7="wall"
 2d_physics/layer_8="door"
+2d_physics/layer_9="e_hit"
+2d_physics/layer_10="e_hurt"
+2d_physics/layer_11="p_hit"
+2d_physics/layer_12="p_hurt"
 
 [physics]
 

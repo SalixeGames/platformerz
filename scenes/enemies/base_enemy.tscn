@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bu51scqvyx7vy"]
+[gd_scene format=3 uid="uid://bu51scqvyx7vy"]
 
 [ext_resource type="Script" uid="uid://cnptybgua51r2" path="res://scripts/enemies/BaseEnemy.cs" id="1_qf3h2"]
 [ext_resource type="Texture2D" uid="uid://dhdyuc06tjsb5" path="res://sprites/enemies/enemies.png" id="1_r5xb8"]
+[ext_resource type="Script" uid="uid://c1f03yr0xp1tl" path="res://scripts/tools/HitBox.cs" id="3_lkvl6"]
+[ext_resource type="Script" uid="uid://cr7xftn77e7wm" path="res://scripts/tools/HurtBox.cs" id="4_n763p"]
 
 [sub_resource type="Animation" id="Animation_qf3h2"]
 length = 0.001
@@ -187,7 +189,13 @@ _data = {
 &"wlk_idle": SubResource("Animation_r5xb8")
 }
 
-[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("Animator", "Sprite", "EnVisionArea")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qf3h2"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lkvl6"]
+radius = 8.0
+
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=2021960116 node_paths=PackedStringArray("Animator", "Sprite", "EnVisionArea")]
 collision_layer = 16
 collision_mask = 103
 script = ExtResource("1_qf3h2")
@@ -196,24 +204,49 @@ Sprite = NodePath("Sprite2D")
 EnVisionArea = NodePath("Vision")
 Speed = 20
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1481478820]
 texture = ExtResource("1_r5xb8")
 hframes = 3
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1428025775]
+scale = Vector2(0.87, 0.87)
 polygon = PackedVector2Array(-6, -6, -4, -6, -3, -6, -2, -6, -1, -6, 1, -6, 6, -6, 6, -5, 6, -4, 6, -3, 6, -1, 6, 1, 6, 6, 5, 6, 4, 6, 3, 6, 1, 6, -1, 6, -6, 6, -6, 1, -6, -1, -6, -3, -6, -4, -6, -5)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ylyo2")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=913740023]
+libraries/ = SubResource("AnimationLibrary_ylyo2")
 
-[node name="Vision" type="Area2D" parent="."]
+[node name="Vision" type="Area2D" parent="." unique_id=1493811269]
 collision_layer = 16
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision" unique_id=1144791829]
 polygon = PackedVector2Array(0, 0, -78.0105, -42.0056, -78.0105, 6.0008, -6, 6)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=660178532]
 visible = false
 polygon = PackedVector2Array(0, 0, -78.0105, -42.0056, -78.0105, 6.0008, -6, 6)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1825903178]
+collision_layer = 256
+collision_mask = 2048
+script = ExtResource("3_lkvl6")
+Damage = 5.23
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=279619800]
+position = Vector2(-3, 0)
+shape = SubResource("CircleShape2D_qf3h2")
+
+[node name="HurtBoxes" type="Node" parent="." unique_id=2100583716]
+
+[node name="HeadHurtBox" type="Area2D" parent="HurtBoxes" unique_id=545376232]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("4_n763p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxes/HeadHurtBox" unique_id=1955053228]
+shape = SubResource("CircleShape2D_lkvl6")
+
+[node name="Label" type="Label" parent="." unique_id=847620438]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="HurtBoxHit" from="HurtBoxes/HeadHurtBox" to="." method="_on_hurt_hit"]

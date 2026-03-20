@@ -20,7 +20,8 @@ public partial class BaseEnemy : CharacterBody2D
     [Export] public Area2D EnVisionArea;
     
     [ExportCategory("Stats")]
-    [Export] public int BaseHealth = 100;
+    [Export] public float BaseHealth = 100.0f;
+    public float Health;
     [Export] public int Speed = 10;
     [Export] public float RoamingDistance = 50.0f;
     
@@ -41,6 +42,8 @@ public partial class BaseEnemy : CharacterBody2D
         _set_sprite_properties();
         if (MovementType != EnemiesMovement.Walking || IsOnFloor()) SpawnPosition = GlobalPosition;
         StateMachine?._Ready(this, EnVisionArea);
+
+        Health = BaseHealth;
     }
 
     private void _set_sprite_properties()
@@ -149,5 +152,10 @@ public partial class BaseEnemy : CharacterBody2D
         Vector2 targetDir = GlobalPosition.DirectionTo(SpawnPosition).Normalized();
         SetScale(new Vector2(targetDir.X <= 0 ? 1 : -1, 1));
         SetRotation(0);
+    }
+
+    public void _on_hurt_hit(float damage)
+    {
+        BaseHealth -= damage;
     }
 }

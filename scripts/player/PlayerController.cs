@@ -164,4 +164,9 @@ public partial class PlayerController : CharacterBody2D
             body.QueueFree();
         }
     }
+
+    public void _on_hurt_hit(float damage)
+    {
+        GlobalScript.Instance.Health -= damage;
+    }
 }

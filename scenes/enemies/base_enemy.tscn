@@ -193,15 +193,16 @@ _data = {
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lkvl6"]
-radius = 8.0
+radius = 11.0
 
-[node name="BaseEnemy" type="CharacterBody2D" unique_id=2021960116 node_paths=PackedStringArray("Animator", "Sprite", "EnVisionArea")]
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=2021960116 node_paths=PackedStringArray("Animator", "Sprite", "EnVisionArea", "HealthLabel")]
 collision_layer = 16
 collision_mask = 103
 script = ExtResource("1_qf3h2")
 Animator = NodePath("AnimationPlayer")
 Sprite = NodePath("Sprite2D")
 EnVisionArea = NodePath("Vision")
+HealthLabel = NodePath("HealthLabel")
 Speed = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1481478820]
@@ -235,18 +236,28 @@ Damage = 5.23
 position = Vector2(-3, 0)
 shape = SubResource("CircleShape2D_qf3h2")
 
-[node name="HurtBoxes" type="Node" parent="." unique_id=2100583716]
-
-[node name="HeadHurtBox" type="Area2D" parent="HurtBoxes" unique_id=545376232]
-collision_layer = 0
-collision_mask = 0
+[node name="HeadHurtBox" type="Area2D" parent="." unique_id=545376232]
+collision_layer = 512
+collision_mask = 1024
 script = ExtResource("4_n763p")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxes/HeadHurtBox" unique_id=1955053228]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHurtBox" unique_id=1955053228]
 shape = SubResource("CircleShape2D_lkvl6")
 
-[node name="Label" type="Label" parent="." unique_id=847620438]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="HurtBoxes" type="Node" parent="." unique_id=2100583716]
 
-[connection signal="HurtBoxHit" from="HurtBoxes/HeadHurtBox" to="." method="_on_hurt_hit"]
+[node name="HealthLabel" type="Label" parent="." unique_id=847620438]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -23.0
+offset_right = 17.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="HurtBoxHit" from="HeadHurtBox" to="." method="_on_hurt_hit"]

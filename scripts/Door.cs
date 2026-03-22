@@ -23,7 +23,6 @@ public partial class Door : Node2D
 
     public override void _Ready()
     {
-        GD.Print("Game loaded in door " + Name + ".");
         GlobalScript.Instance.DataLoaded += _on_data_loaded;  // TODO: Signal ne marche pas???
         _on_data_loaded();
         _currentBlobPriceReal = BlobPrice - GlobalScript.Instance.BlobsList.Count;
@@ -102,7 +101,6 @@ public partial class Door : Node2D
 
     public void _on_data_loaded()
     {
-        GD.Print("Game loaded in door " + Name + ".");
         int blobPriceReal = BlobPrice - GlobalScript.Instance.BlobsList.Count;
         CostLabel.Texture = NumberSprites[blobPriceReal];
         _adjustePrice();

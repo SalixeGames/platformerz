@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ble8qvrvlupab" path="res://sprites/player/player_sprite_sheet_small.png" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://cr7xftn77e7wm" path="res://scripts/tools/HurtBox.cs" id="4_hqtel"]
 [ext_resource type="Script" uid="uid://c81g40hmqdoac" path="res://Hud.cs" id="5_sweqy"]
+[ext_resource type="Script" uid="uid://c1f03yr0xp1tl" path="res://scripts/tools/HitBox.cs" id="6_2hs0m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
 radius = 6.0
@@ -14,6 +15,9 @@ radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sweqy"]
 radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jxqw"]
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_4flbx"]
 length = 0.001
@@ -1436,6 +1440,16 @@ script = ExtResource("4_hqtel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/HurtBox" unique_id=1288552133]
 shape = SubResource("CircleShape2D_sweqy")
+
+[node name="HitBox" type="Area2D" parent="AreaContainer" unique_id=1970097049]
+position = Vector2(2, 6)
+collision_layer = 1024
+collision_mask = 512
+script = ExtResource("6_2hs0m")
+Damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaContainer/HitBox" unique_id=883140571]
+shape = SubResource("CircleShape2D_1jxqw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1791256255]
 

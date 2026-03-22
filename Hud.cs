@@ -23,7 +23,6 @@ public partial class Hud : Control
 
 	public void _on_data_loaded()
 	{
-		GD.Print("Game loaded in HUD.");
 		HealthLabel.Text = "Health: " + GlobalScript.Instance.Health;
 	}
 }

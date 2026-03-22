@@ -20,6 +20,7 @@ public partial class BaseEnemy : CharacterBody2D
     [Export] public Area2D EnVisionArea;
     
     [ExportCategory("Stats")]
+    [Export] public Label HealthLabel;
     [Export] public float BaseHealth = 100.0f;
     public float Health;
     [Export] public int Speed = 10;
@@ -44,6 +45,7 @@ public partial class BaseEnemy : CharacterBody2D
         StateMachine?._Ready(this, EnVisionArea);
 
         Health = BaseHealth;
+        HealthLabel.Text = Health.ToString();
     }
 
     private void _set_sprite_properties()
@@ -139,6 +141,8 @@ public partial class BaseEnemy : CharacterBody2D
     public void Flip()
     {
         SetScale(new Vector2(-Scale.X, Scale.Y));
+        HealthLabel.SetScale(new Vector2(1, 1));
+        HealthLabel.SetPosition(new Vector2(-17, -30));
     }
 
     public void GoTowardSpawn()
@@ -152,10 +156,14 @@ public partial class BaseEnemy : CharacterBody2D
         Vector2 targetDir = GlobalPosition.DirectionTo(SpawnPosition).Normalized();
         SetScale(new Vector2(targetDir.X <= 0 ? 1 : -1, 1));
         SetRotation(0);
+        HealthLabel.SetScale(new Vector2(targetDir.X <= 0 ? 1 : -1, 1));
+        HealthLabel.SetPosition(new Vector2(targetDir.X <= 0 ? -17 : 17, -25));
     }
 
     public void _on_hurt_hit(float damage)
     {
-        BaseHealth -= damage;
+        GD.Print(damage);
+        Health -= damage;
+        HealthLabel.Text = Health.ToString();
     }
 }

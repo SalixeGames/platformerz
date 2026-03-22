@@ -10,7 +10,7 @@ public partial class GlobalScript : Node
     private static string _savingPath = "res://";
 
     public float Health { get; set; }
-    private const float BaseHealth = 100.0f;
+    private const float BaseHealth = 10.0f;
     
     public Array<int> BlobsList { get; set; } = new Array<int>();
     
@@ -30,6 +30,8 @@ public partial class GlobalScript : Node
     }
 
     public Array<Powerups> PowersList { get; set; } = new Array<Powerups>();
+
+    public int DeathFloor = 600;
 
     public override void _Ready()
     {
@@ -111,6 +113,12 @@ public partial class GlobalScript : Node
                 PowersList.Add((Powerups)powerName.ToInt());
             }
         }
+    }
+
+    public void _on_death()
+    {
+        GD.Print("Reseting life to: " + BaseHealth);
+        Health = BaseHealth;
     }
     
     [Signal]

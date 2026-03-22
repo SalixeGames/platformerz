@@ -35,6 +35,7 @@ public partial class PlayerController : CharacterBody2D
     {
         stateMachine?._Ready(this);
         GlobalScript.Instance.LoadGame("test_save");
+        Death += GlobalScript.Instance._on_death;
     }
 
     /* public override void _ExitTree()
@@ -44,8 +45,8 @@ public partial class PlayerController : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Position.Y > 600)
-            Position = Vector2.Zero;
+        if (Position.Y > GlobalScript.Instance.DeathFloor)
+            Die();
         
         MoveAndSlide();
         stateMachine._PhysicsProcess(delta);
@@ -112,6 +113,12 @@ public partial class PlayerController : CharacterBody2D
         stateMachine._UnhandledInput(@event);
     }
 
+    public void Die()
+    {
+        Position = Vector2.Zero;
+        EmitSignal(SignalName.Death);
+    }
+
     public void _on_ceiling_entered(Node2D body)
     {
         OnCeil = true;
@@ -168,5 +175,12 @@ public partial class PlayerController : CharacterBody2D
     public void _on_hurt_hit(float damage)
     {
         GlobalScript.Instance.Health -= damage;
+        if (GlobalScript.Instance.Health <= 0)
+        {
+            Die();
+        }
     }
+	
+    [Signal]
+    public delegate void DeathEventHandler();
 }

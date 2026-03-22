@@ -164,6 +164,15 @@ public partial class BaseEnemy : CharacterBody2D
     {
         GD.Print(damage);
         Health -= damage;
+        if (Health <= 0)
+        {
+            Die();
+        }
         HealthLabel.Text = Health.ToString();
+    }
+
+    public void Die()
+    {
+        QueueFree();
     }
 }

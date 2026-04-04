@@ -6,4 +6,7 @@
   <ItemGroup>
     <Folder Include="scenes\enemies\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TODO.md" />
+  </ItemGroup>
 </Project>

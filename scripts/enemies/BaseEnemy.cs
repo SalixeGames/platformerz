@@ -22,7 +22,7 @@ public partial class BaseEnemy : CharacterBody2D
     [ExportCategory("Stats")]
     [Export] public Label HealthLabel;
     [Export] public float BaseHealth = 100.0f;
-    public float Health;
+    public float Health = 1.0f;
     [Export] public int Speed = 10;
     [Export] public float RoamingDistance = 50.0f;
     
@@ -162,12 +162,8 @@ public partial class BaseEnemy : CharacterBody2D
 
     public void _on_hurt_hit(float damage)
     {
-        GD.Print(damage);
         Health -= damage;
-        if (Health <= 0)
-        {
-            Die();
-        }
+        StateMachine.TransitionTo(StateMachine.EnStates["knock_back"]);
         HealthLabel.Text = Health.ToString();
     }
 

@@ -27,9 +27,11 @@ public partial class EnStateMachine : Resource
         
         visionArea.AreaEntered += OnPlayerInVision;
         visionArea.AreaExited += OnPlayerOutVision;
+        controller.Animator.AnimationFinished += _AnimationEnd;
         EnStates = new System.Collections.Generic.Dictionary<string, EnState>();
         EnStatesList.Add(new MoveState());
         EnStatesList.Add(new FleeState());
+        EnStatesList.Add(new KnockBackState());
         
         foreach (EnState enState in EnStatesList) {
             enState.Ready(this);
@@ -56,7 +58,7 @@ public partial class EnStateMachine : Resource
         TransitionTo(CurrentState?.PhysicsUpdate((float)delta));
     }
 
-    public void _AnimationEnd(string animationName)
+    public void _AnimationEnd(StringName animationName)
     {
         TransitionTo(CurrentState?.AnimationEnd(animationName));
     }

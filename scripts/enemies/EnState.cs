@@ -31,7 +31,7 @@ public partial class EnState : Resource
 		return this;
 	}
 
-	public virtual EnState AnimationEnd(string animationName) 
+	public virtual EnState AnimationEnd(StringName animationName) 
 	{
 		return this;
 	}

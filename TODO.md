@@ -18,7 +18,7 @@
 - [ ] [Level Design](#level-design)
 
 ## Enemis
-- [ ] Knock-up
+- [X] Knock-up
 - [ ] Attaque active
   - [ ] Dash en avant
   - [ ] Dash sur joueur

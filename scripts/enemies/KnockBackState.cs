@@ -37,6 +37,7 @@ public partial class KnockBackState : EnState
 
     public override EnState AnimationEnd(StringName animationName)
     {
+        GD.Print("Anime End");
         if (animationName == "knock_back")
         {
             return fsm.EnStates["move"];
@@ -46,6 +47,7 @@ public partial class KnockBackState : EnState
 
     public override void Exit()
     {
+        GD.Print("Exit called");
         Controller.MovementDirection = BaseDirection;
         if (Controller.Health <= 0)
         {
@@ -53,10 +55,9 @@ public partial class KnockBackState : EnState
         }
         base.Exit();
     }
-
-    public override EnState OnPlayerOutVision(Area2D visionArea)
+    
+    public override EnState OnHurt(float damage)
     {
-        base.OnPlayerOutVision(visionArea);
-        return fsm.EnStates["move"];
+        return this;
     }
 }

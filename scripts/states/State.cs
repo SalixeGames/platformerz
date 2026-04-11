@@ -33,8 +33,6 @@ public partial class State : Resource
 
 		if (@event.IsActionPressed("attack") && hasAttack && fsm.Controller.CanAttack)
 		{
-			fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity/2;
-			fsm.Controller.Velocity = fsm.Controller.Direction;
 			return fsm.States["attack"];
 		}
 		return this;

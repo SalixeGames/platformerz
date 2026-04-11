@@ -10,7 +10,7 @@ public partial class GlobalScript : Node
     private static string _savingPath = "res://";
 
     public float Health { get; set; }
-    private const float BaseHealth = 10.0f;
+    private const float BaseHealth = 10000.0f;
     
     public Array<int> BlobsList { get; set; } = new Array<int>();
     

@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using System.Linq;
+using System.Globalization;
 using Platformerz.scripts.enemies;
 
 public partial class BaseEnemy : CharacterBody2D
@@ -45,7 +45,7 @@ public partial class BaseEnemy : CharacterBody2D
         StateMachine?._Ready(this, EnVisionArea);
 
         Health = BaseHealth;
-        HealthLabel.Text = Health.ToString();
+        HealthLabel.Text = Health.ToString(CultureInfo.CurrentCulture);
     }
 
     private void _set_sprite_properties()
@@ -162,9 +162,8 @@ public partial class BaseEnemy : CharacterBody2D
 
     public void _on_hurt_hit(float damage)
     {
-        Health -= damage;
-        StateMachine.TransitionTo(StateMachine.EnStates["knock_back"]);
-        HealthLabel.Text = Health.ToString();
+        StateMachine.OnHurt(damage);
+        HealthLabel.Text = Health.ToString(CultureInfo.CurrentCulture);
     }
 
     public void Die()

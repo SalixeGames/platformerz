@@ -221,8 +221,8 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_qf3h2"]
 radius = 4.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lkvl6"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n763p"]
+size = Vector2(18, 18)
 
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=2021960116 node_paths=PackedStringArray("Animator", "Sprite", "EnVisionArea", "HealthLabel")]
 collision_layer = 16
@@ -241,7 +241,7 @@ hframes = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1428025775]
 scale = Vector2(0.87, 0.87)
-polygon = PackedVector2Array(-6, -6, -4, -6, -3, -6, -2, -6, -1, -6, 1, -6, 6, -6, 6, -5, 6, -4, 6, -3, 6, -1, 6, 1, 6, 6, 5, 6, 4, 6, 3, 6, 1, 6, -1, 6, -6, 6, -6, 1, -6, -1, -6, -3, -6, -4, -6, -5)
+polygon = PackedVector2Array(-6, -1, -6, -6, -1, -6, -1, -7, -1, -8, 1, -8, 1, -6, 6, -6, 6, -1, 7, -1, 8, -1, 8, 1, 6, 1, 6, 6, 1, 6, 1, 7, 1, 8, -1, 8, -1, 6, -6, 6, -6, 1, -7, 1, -8, 1, -8, -1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=913740023]
 libraries/ = SubResource("AnimationLibrary_ylyo2")
@@ -272,7 +272,7 @@ collision_mask = 1024
 script = ExtResource("4_n763p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHurtBox" unique_id=1955053228]
-shape = SubResource("CircleShape2D_lkvl6")
+shape = SubResource("RectangleShape2D_n763p")
 
 [node name="HurtBoxes" type="Node" parent="." unique_id=2100583716]
 

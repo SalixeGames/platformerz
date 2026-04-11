@@ -32,7 +32,12 @@ public partial class AttackState : State
 
     public override State AnimationEnd(string animationName)
     {
-        if (_combo) return fsm.States["attack_2"];
+        if (_combo)
+        {
+            fsm.Controller.Direction.Y = -fsm.Controller.jumpVelocity/2;
+            fsm.Controller.Velocity = fsm.Controller.Direction;
+            return fsm.States["attack_2"];
+        }
         return fsm.PreAttackState;
     }
 }

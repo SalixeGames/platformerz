@@ -45,4 +45,10 @@ public partial class EnState : Resource
 	{
 		return this;
 	}
+
+	public virtual EnState OnHurt(float damage)
+	{
+		fsm.Controller.Health -= damage;
+		return fsm.EnStates["knock_back"];
+	}
 }

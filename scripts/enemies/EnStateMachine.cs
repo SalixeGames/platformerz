@@ -83,4 +83,9 @@ public partial class EnStateMachine : Resource
     {
         TransitionTo(CurrentState?.OnPlayerOutVision(visionArea));
     }
+
+    public void OnHurt(float damage)
+    {
+        TransitionTo(CurrentState?.OnHurt(damage));
+    }
 }

@@ -19,6 +19,8 @@
 
 ## Enemis
 - [X] Knock-up
+- [ ] Assurer bonne direction
+- [ ] Pause quand voit le joueur
 - [ ] Attaque active
   - [ ] Dash en avant
   - [ ] Dash sur joueur

@@ -16,6 +16,12 @@ public partial class MoveState : EnState
         fsm = stateMachine;
     }
 
+    public override void Enter()
+    {
+        GD.Print("Entering move");
+        base.Enter();
+    }
+
     public override EnState OnPlayerInVision(Area2D visionArea)
     {
         base.OnPlayerInVision(visionArea);

@@ -72,7 +72,7 @@ public partial class BaseEnemy : CharacterBody2D
     {
         if (Position.Y > 600)
             QueueFree();
-        
+        StateMachine._PhysicsProcess(delta);
         MoveAndSlide();
     }
 	

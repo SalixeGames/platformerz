@@ -112,15 +112,13 @@ position = Vector2(415, -108)
 Powerup = 7
 
 [node name="BaseEnemy" parent="." unique_id=333433999 instance=ExtResource("6_q52up")]
-position = Vector2(-72, -690)
+position = Vector2(-72, -650)
 
 [node name="BaseEnemy2" parent="." unique_id=78602534 instance=ExtResource("6_q52up")]
 position = Vector2(324, -720)
-MovementType = 1
 BaseHealth = 10.0
 
 [node name="BaseEnemy3" parent="." unique_id=1747339929 instance=ExtResource("6_q52up")]
 position = Vector2(84, -636)
-MovementType = 1
 Direction = 0
 BaseHealth = 20.0

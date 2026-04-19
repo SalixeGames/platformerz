@@ -1,12 +1,5 @@
 ﻿namespace Platformerz.scripts.enemies;
 
-public enum EnemiesMovement
-{
-    Walking,
-    Flying,
-    Both
-}
-
 public enum EnemiesDirection
 {
     Vertical,
@@ -24,6 +17,6 @@ public enum EnemiesAttackType
 {
     Forward,
     Target,
-    Spring,
+    Spring,  // Retirer?
     Projectile
 }

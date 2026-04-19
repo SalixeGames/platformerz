@@ -59,33 +59,6 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(0.5, 0.5), Vector2(1, 0.33), Vector2(1, 0.25)]
 }
 
-[sub_resource type="Animation" id="Animation_n763p"]
-resource_name = "duo_idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionPolygon2D:polygon")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [PackedVector2Array(-6, -1, -6, -6, -1, -6, -1, -7, -1, -8, 1, -8, 1, -6, 6, -6, 6, -1, 7, -1, 8, -1, 8, 1, 6, 1, 6, 6, 1, 6, 1, 7, 1, 8, -1, 8, -1, 6, -6, 6, -6, 1, -7, 1, -8, 1, -8, -1)]
-}
-
 [sub_resource type="Animation" id="Animation_n2ebm"]
 resource_name = "flee"
 length = 0.5
@@ -127,6 +100,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [PackedVector2Array(-7, -1, -7, -2, -2, -7, -1, -7, -1, -8, 1, -8, 1, -7, 2, -7, 7, -2, 7, -1, 8, -1, 8, 1, 7, 1, 7, 2, 2, 7, 1, 7, 1, 8, -1, 8, -1, 7, -2, 7, -7, 2, -7, 1, -8, 1, -8, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_n763p"]
+resource_name = "horizontal_idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(-6, -1, -6, -6, -1, -6, -1, -7, -1, -8, 1, -8, 1, -6, 6, -6, 6, -1, 7, -1, 8, -1, 8, 1, 6, 1, 6, 6, 1, 6, 1, 7, 1, 8, -1, 8, -1, 6, -6, 6, -6, 1, -7, 1, -8, 1, -8, -1)]
 }
 
 [sub_resource type="Animation" id="Animation_hwcqj"]
@@ -209,9 +209,9 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_qf3h2"),
 &"dash": SubResource("Animation_2t7ph"),
-&"duo_idle": SubResource("Animation_n763p"),
 &"flee": SubResource("Animation_n2ebm"),
 &"fly_idle": SubResource("Animation_lkvl6"),
+&"horizontal_idle": SubResource("Animation_n763p"),
 &"knock_back": SubResource("Animation_hwcqj"),
 &"move": SubResource("Animation_ylyo2"),
 &"shoot": SubResource("Animation_i1su5"),

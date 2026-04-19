@@ -6,7 +6,6 @@ using Platformerz.scripts.enemies;
 public partial class BaseEnemy : CharacterBody2D
 {
     [ExportCategory("Enemy Type")]
-    [Export] public EnemiesMovement MovementType = EnemiesMovement.Walking;
     [Export] public EnemiesDirection Direction = EnemiesDirection.Horizontal;
     [Export] public EnemiesAggroLevel AggroLevel = EnemiesAggroLevel.Passive;
     [Export] public EnemiesAttackType AttackType = EnemiesAttackType.Forward;
@@ -41,7 +40,7 @@ public partial class BaseEnemy : CharacterBody2D
         }
 
         _set_sprite_properties();
-        if (MovementType != EnemiesMovement.Walking || IsOnFloor()) SpawnPosition = GlobalPosition;
+        SpawnPosition = GlobalPosition;
         StateMachine?._Ready(this, EnVisionArea);
 
         Health = BaseHealth;
@@ -50,14 +49,18 @@ public partial class BaseEnemy : CharacterBody2D
 
     private void _set_sprite_properties()
     {
-        Sprite.Frame = (int) MovementType;
-        switch (MovementType)
+        Sprite.Frame = (int) Direction;
+        if (IsOnFloor())
         {
-            case EnemiesMovement.Flying:
+            Sprite.Frame = 2;
+        }
+        switch (Direction)
+        {
+            case EnemiesDirection.Vertical:
                 Animator.Play("fly_idle");
                 break;
-            case EnemiesMovement.Both:
-                Animator.Play("duo_idle");
+            case EnemiesDirection.Horizontal:
+                Animator.Play("horizontal_idle");
                 break;
             default:
                 Animator.Play("wlk_idle");
@@ -92,17 +95,6 @@ public partial class BaseEnemy : CharacterBody2D
         if (BumbedOnSurface())
         {
             Flip();
-        }
-        
-        if (!IsOnFloor() && MovementType == EnemiesMovement.Walking)
-        {
-            MovementDirection.Y += (Gravity * (float)delta) / Speed;
-            if (OldSpawnPosition == Vector2.Zero)
-                SpawnPosition = GlobalPosition;
-        }
-        else if (IsOnFloor() && MovementType == EnemiesMovement.Walking)
-        {
-            MovementDirection.Y = 0;
         }
         
         if (IsOnFloor() && OldSpawnPosition == Vector2.Zero)

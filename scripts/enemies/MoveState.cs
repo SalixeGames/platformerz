@@ -16,32 +16,6 @@ public partial class MoveState : EnState
         fsm = stateMachine;
     }
 
-    public override void Enter()
-    {
-        base.Enter();
-    }
-
-    public override EnState Update(float delta)
-    {
-        if (Controller.MovementType == EnemiesMovement.Both)
-        {
-            _deltaWall -= delta;
-            if (Controller.IsOnWall() && !_onWall && _deltaWall <= 0)
-            {
-                _onWall = true;
-                _deltaWall = 1.0f;
-                Controller.MovementDirection = Vector2.Up;
-            }
-            else if (Controller.IsOnFloor() && _onWall && _deltaWall <= 0)
-            {
-                _onWall = false;
-                _deltaWall = 1.0f;
-                Controller.MovementDirection = Vector2.Left;
-            }
-        }
-        return base.Update(delta);
-    }
-
     public override EnState OnPlayerInVision(Area2D visionArea)
     {
         base.OnPlayerInVision(visionArea);

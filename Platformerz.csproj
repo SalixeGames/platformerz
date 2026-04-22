@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="scenes\enemies\" />
+    <Folder Include="scripts\enemies\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TODO.md" />

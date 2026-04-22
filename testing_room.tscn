@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cd6ev54o3e7i1" path="res://scenes/pickables/blob.tscn" id="3_hihby"]
 [ext_resource type="PackedScene" uid="uid://dchvj578mcpog" path="res://scenes/door.tscn" id="4_jqyws"]
 [ext_resource type="PackedScene" uid="uid://bcsgmbadt8yle" path="res://scenes/pickables/powerups.tscn" id="5_b24ak"]
-[ext_resource type="PackedScene" uid="uid://bu51scqvyx7vy" path="res://scenes/enemies/base_enemy.tscn" id="6_q52up"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hihby"]
 texture = ExtResource("2_hihby")
@@ -110,15 +109,3 @@ Powerup = 6
 modulate = Color(0.788235, 0.333333, 0, 1)
 position = Vector2(415, -108)
 Powerup = 7
-
-[node name="BaseEnemy" parent="." unique_id=333433999 instance=ExtResource("6_q52up")]
-position = Vector2(-72, -650)
-
-[node name="BaseEnemy2" parent="." unique_id=78602534 instance=ExtResource("6_q52up")]
-position = Vector2(324, -720)
-BaseHealth = 10.0
-
-[node name="BaseEnemy3" parent="." unique_id=1747339929 instance=ExtResource("6_q52up")]
-position = Vector2(84, -636)
-Direction = 0
-BaseHealth = 20.0

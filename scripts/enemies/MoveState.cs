@@ -26,6 +26,6 @@ public partial class MoveState : EnState
     {
         base.OnPlayerInVision(visionArea);
         fsm.EnStates["flee"].Target = visionArea;
-        return fsm.EnStates["flee"];
+        return fsm.EnStates["freeze"];
     }
 }

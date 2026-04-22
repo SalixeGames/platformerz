@@ -102,6 +102,23 @@ tracks/1/keys = {
 "values": [PackedVector2Array(-7, -1, -7, -2, -2, -7, -1, -7, -1, -8, 1, -8, 1, -7, 2, -7, 7, -2, 7, -1, 8, -1, 8, 1, 7, 1, 7, 2, 2, 7, 1, 7, 1, 8, -1, 8, -1, 7, -2, 7, -7, 2, -7, 1, -8, 1, -8, -1)]
 }
 
+[sub_resource type="Animation" id="Animation_h4c3k"]
+resource_name = "freeze"
+loop_mode = 1
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.5)]
+}
+
 [sub_resource type="Animation" id="Animation_n763p"]
 resource_name = "horizontal_idle"
 tracks/0/type = "value"
@@ -211,6 +228,7 @@ _data = {
 &"dash": SubResource("Animation_2t7ph"),
 &"flee": SubResource("Animation_n2ebm"),
 &"fly_idle": SubResource("Animation_lkvl6"),
+&"freeze": SubResource("Animation_h4c3k"),
 &"horizontal_idle": SubResource("Animation_n763p"),
 &"knock_back": SubResource("Animation_hwcqj"),
 &"move": SubResource("Animation_ylyo2"),
@@ -241,7 +259,7 @@ hframes = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1428025775]
 scale = Vector2(0.87, 0.87)
-polygon = PackedVector2Array(-6, -1, -6, -6, -1, -6, -1, -7, -1, -8, 1, -8, 1, -6, 6, -6, 6, -1, 7, -1, 8, -1, 8, 1, 6, 1, 6, 6, 1, 6, 1, 7, 1, 8, -1, 8, -1, 6, -6, 6, -6, 1, -7, 1, -8, 1, -8, -1)
+polygon = PackedVector2Array(-6, -6, -4, -6, -3, -6, -2, -6, -1, -6, 1, -6, 6, -6, 6, -5, 6, -4, 6, -3, 6, -1, 6, 1, 6, 6, 5, 6, 4, 6, 3, 6, 1, 6, -1, 6, -6, 6, -6, 1, -6, -1, -6, -3, -6, -4, -6, -5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=913740023]
 libraries/ = SubResource("AnimationLibrary_ylyo2")

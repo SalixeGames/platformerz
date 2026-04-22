@@ -7,7 +7,6 @@ namespace Platformerz.scripts.enemies;
 public partial class FleeState : EnState
 {
     private DateTime _timePLayerOut = DateTime.MinValue;
-    private bool _playerInVision = true;
     
     public override void Ready(EnStateMachine stateMachine)
     {
@@ -19,8 +18,12 @@ public partial class FleeState : EnState
     public override void Enter()
     {
         base.Enter();
+        _timePLayerOut = DateTime.Now;
+        
         if (Target == null)
+        {
             Controller.MovementDirection *= -1;
+        }
         else
         {
             Controller.SetDirToTarget(Target.GlobalPosition, true);
@@ -29,12 +32,11 @@ public partial class FleeState : EnState
 
     public override EnState PhysicsUpdate(float delta)
     {
-        GD.Print(DateTime.Now - _timePLayerOut);
-        if (DateTime.Now - _timePLayerOut > TimeSpan.FromSeconds(1) && !_playerInVision)
+        if (DateTime.Now - _timePLayerOut > TimeSpan.FromSeconds(1) && !PlayerInVision)
         {
             _timePLayerOut = DateTime.MinValue;
             Controller.GoTowardSpawn();
-            _playerInVision = true;
+            PlayerInVision = true;
             return fsm.EnStates["move"];
         }
         return base.PhysicsUpdate(delta);
@@ -43,8 +45,6 @@ public partial class FleeState : EnState
     public override EnState OnPlayerOutVision(Area2D visionArea)
     {
         _timePLayerOut = DateTime.Now;
-        _playerInVision = false;
-        GD.Print(_timePLayerOut);
         return base.OnPlayerOutVision(visionArea);
     }
 }

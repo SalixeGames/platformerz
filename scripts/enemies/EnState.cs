@@ -11,10 +11,13 @@ public partial class EnState : Resource
 	public EnStateMachine fsm;
 	public BaseEnemy Controller;
 	public Area2D Target;
+	public bool PlayerInVision = false;
+	public DateTime StateTimer = DateTime.MinValue;
 
 	public virtual void Enter()
 	{
 		fsm.Controller.UpdateAnim(Name);
+		StateTimer = DateTime.Now;
 	}
 	public virtual void Exit() {}
 
@@ -38,11 +41,15 @@ public partial class EnState : Resource
 
 	public virtual EnState OnPlayerInVision(Area2D visionArea)
 	{
+		PlayerInVision = true;
+		GD.Print("Player In Vision");
 		return this;
 	}
 
 	public virtual EnState OnPlayerOutVision(Area2D visionArea)
 	{
+		PlayerInVision = false;
+		GD.Print("Player out");
 		return this;
 	}
 

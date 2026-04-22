@@ -32,6 +32,7 @@ public partial class EnStateMachine : Resource
         EnStatesList.Add(new MoveState());
         EnStatesList.Add(new FleeState());
         EnStatesList.Add(new KnockBackState());
+        EnStatesList.Add(new FreezeState());
         
         foreach (EnState enState in EnStatesList) {
             enState.Ready(this);

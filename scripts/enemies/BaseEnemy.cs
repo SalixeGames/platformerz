@@ -160,6 +160,8 @@ public partial class BaseEnemy : CharacterBody2D
 
     public void Die()
     {
+        GD.Print("Free");
+        StateMachine?.Free();
         QueueFree();
     }
 }

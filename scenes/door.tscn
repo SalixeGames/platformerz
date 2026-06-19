@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dchvj578mcpog"]
+[gd_scene format=3 uid="uid://dchvj578mcpog"]
 
 [ext_resource type="Texture2D" uid="uid://ci1m4g8g0da1g" path="res://sprites/door.png" id="1_hpvv5"]
 [ext_resource type="Script" uid="uid://dyd6718tog2iy" path="res://scripts/Door.cs" id="1_uvdjg"]
@@ -66,7 +66,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5w8r"]
 size = Vector2(38, 20)
 
-[node name="Door" type="Node2D" node_paths=PackedStringArray("AnimationPlayer", "PressE", "CantPressE", "CostLabel")]
+[node name="Door" type="Node2D" unique_id=471850478 node_paths=PackedStringArray("AnimationPlayer", "PressE", "CantPressE", "CostLabel")]
 z_index = -1
 script = ExtResource("1_uvdjg")
 AnimationPlayer = NodePath("AnimationPlayer")
@@ -77,32 +77,30 @@ CostLabel = NodePath("NumberSprite")
 NumberSprites = Array[CompressedTexture2D]([ExtResource("6_q5w8r"), ExtResource("3_hlrvf"), ExtResource("4_if5a1"), ExtResource("5_ab21w"), ExtResource("6_1ohpd"), ExtResource("7_hac6s"), ExtResource("8_j5bs6"), ExtResource("9_2bwol"), ExtResource("10_piyrh"), ExtResource("11_yjedc"), ExtResource("12_qf4ce"), ExtResource("13_aivh6"), ExtResource("14_7ljja"), ExtResource("15_gabdl"), ExtResource("16_2fj8v"), ExtResource("17_b6ryk"), ExtResource("18_ttkhy"), ExtResource("19_0hp88"), ExtResource("20_03ntk"), ExtResource("21_g81xo")])
 TextFont = ExtResource("2_18pbm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1344805594]
 z_index = -1
 texture = ExtResource("1_hpvv5")
 hframes = 13
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_18pbm")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1171659752]
+libraries/ = SubResource("AnimationLibrary_18pbm")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1354035570]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1768585084]
 shape = SubResource("RectangleShape2D_q5w8r")
 
-[node name="PressE" type="Sprite2D" parent="."]
+[node name="PressE" type="Sprite2D" parent="." unique_id=668504133]
 visible = false
 position = Vector2(0, -17)
 texture = ExtResource("3_la1wf")
 
-[node name="CantPressE" type="Sprite2D" parent="."]
+[node name="CantPressE" type="Sprite2D" parent="." unique_id=2076410947]
 visible = false
 position = Vector2(0, -17)
 texture = ExtResource("4_18pbm")
 
-[node name="NumberSprite" type="Sprite2D" parent="."]
+[node name="NumberSprite" type="Sprite2D" parent="." unique_id=1943359607]
 texture = ExtResource("6_q5w8r")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_animation_finished"]
